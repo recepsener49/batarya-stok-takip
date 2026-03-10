@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Batarya Stok Takip</title>
 <style>
-/* SENİN TASARIMININ TAMAMI */
+/* SENİN ÖZEL TASARIMIN */
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bg:#07090f;--s1:#0d1117;--s2:#111820;
@@ -16,6 +16,7 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
+/* ARKA PLAN ANİMASYONU */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
@@ -31,117 +32,96 @@ body::before{
 .orb{position:absolute;border-radius:50%;}
 .orb1{width:600px;height:600px;top:-15%;left:-10%; background:radial-gradient(circle,rgba(79,168,255,0.15) 0%,transparent 65%); animation:float1 18s ease-in-out infinite;}
 .orb2{width:500px;height:500px;top:40%;right:-8%; background:radial-gradient(circle,rgba(0,212,200,0.13) 0%,transparent 65%); animation:float2 22s ease-in-out infinite;}
-.orb3{width:420px;height:420px;bottom:-8%;left:28%; background:radial-gradient(circle,rgba(0,224,144,0.12) 0%,transparent 65%); animation:float3 16s ease-in-out infinite;}
-.orb4{width:300px;height:300px;top:20%;left:55%; background:radial-gradient(circle,rgba(176,128,255,0.10) 0%,transparent 65%); animation:float4 24s ease-in-out infinite;}
 @keyframes float1{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,-30px);}}
 @keyframes float2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,25px);}}
-@keyframes float3{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-20px);}}
-@keyframes float4{0%,100%{transform:translate(0,0);}50%{transform:translate(-25px,30px);}}
 
 .mesh{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.02; background-image:linear-gradient(rgba(100,160,255,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(100,160,255,0.8) 1px,transparent 1px); background-size:55px 55px;}
 
 .app{position:relative;z-index:1;max-width:1560px;margin:0 auto;padding:0 32px 80px;}
 
 .header{display:flex;align-items:center;justify-content:space-between;padding:26px 0 28px;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--b1);margin-bottom:28px;}
-.logo{display:flex;align-items:center;gap:12px;}
-.logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1a6ef5,#00d4c8);display:flex;align-items:center;justify-content:center;font-size:1.2em;box-shadow:0 4px 20px rgba(26,110,245,0.5);}
 .logo-text{font-size:1.15em;font-weight:800;background:linear-gradient(135deg,var(--blue2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .hclock{font-size:0.78em;font-weight:700;letter-spacing:1.5px;color:var(--t2);background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:9px 16px;}
-.hbtn{background:var(--s1);border:1px solid var(--b1);border-radius:10px;color:var(--t2);padding:9px 16px;font-size:0.78em;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
-.hbtn.red{color:var(--red);}
 
 .card{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;border-radius:22px 22px 0 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);}
 .clbl{font-size:0.67em;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
 .pip{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;}
 
 .grid{display:grid;grid-template-columns:400px 1fr;gap:22px;align-items:start;}
 @media(max-width:1100px){.grid{grid-template-columns:1fr;}}
-.sidebar{display:flex;flex-direction:column;gap:14px;}
-@media(min-width:1100px){.sidebar{position:sticky;top:22px;max-height:calc(100vh - 44px);overflow-y:auto;scrollbar-width:thin;}}
 
 .eff-block{display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--b1);margin-bottom:16px;}
-.eff-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;flex-shrink:0;}
-.eff-circle svg{position:absolute;inset:0;width:100%;height:100%;}
-.eff-num{position:relative;z-index:1;font-size:1.05em;font-weight:900;line-height:1;}
-.eff-pct{position:relative;z-index:1;font-size:0.45em;color:var(--t2);}
+.eff-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;}
+.eff-circle svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);}
+.eff-num{font-size:1.05em;font-weight:900;}
 
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
-.met{background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:13px 8px;text-align:center;position:relative;overflow:hidden;}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
+.met{background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:13px 8px;text-align:center;}
 .met-val{font-size:1.8em;font-weight:900;line-height:1;}
-.met-lbl{font-size:0.58em;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;}
+.met-lbl{font-size:0.58em;font-weight:700;color:var(--t3);text-transform:uppercase;margin-top:4px;}
 
 .bar-item{margin-bottom:11px;}
 .bar-top{display:flex;justify-content:space-between;margin-bottom:5px;}
-.bar-name{font-size:0.82em;font-weight:700;display:flex;align-items:center;gap:7px;}
 .bar-bg{height:7px;border-radius:4px;background:rgba(255,255,255,0.06);overflow:hidden;}
 .bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
 
 .order-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:11px;margin-bottom:6px;}
-.order-qty{font-size:0.8em;font-weight:800;background:rgba(0,224,144,0.1);color:var(--green);border:1px solid rgba(0,224,144,0.2);padding:3px 10px;border-radius:7px;}
-.order-total{margin-top:10px;padding:10px 14px;background:rgba(0,224,144,0.07);border:1px solid rgba(0,224,144,0.15);border-radius:11px;display:flex;justify-content:space-between;align-items:center;}
+.order-qty{font-size:0.8em;font-weight:800;color:var(--green);border:1px solid rgba(0,224,144,0.2);padding:3px 10px;border-radius:7px;}
 
-.btn{width:100%;padding:13px;border-radius:13px;border:none;font-family:inherit;font-size:0.88em;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;margin-top:8px;}
+.btn{width:100%;padding:13px;border-radius:13px;border:none;font-weight:700;cursor:pointer;margin-top:8px;}
 .btn-green{background:linear-gradient(135deg,var(--green2),var(--green));color:#001a0f;}
 .btn-wa{background:linear-gradient(135deg,#128c3b,#25D366);color:#fff;}
 
 .tabs{display:flex;gap:3px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:4px;margin-bottom:18px;}
-.tbtn{flex:1;padding:10px 12px;border-radius:10px;border:none;font-family:inherit;font-size:0.8em;font-weight:700;cursor:pointer;color:var(--t3);background:transparent;}
+.tbtn{flex:1;padding:10px;border-radius:10px;border:none;font-weight:700;cursor:pointer;color:var(--t3);background:transparent;}
 .tbtn.active{background:rgba(255,255,255,0.07);color:var(--text);border:1px solid var(--b1);}
 .tab{display:none;}.tab.on{display:block;}
 
-.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
-.icard{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;transition:all 0.25s;}
-.icard.crit{border-color:rgba(255,80,96,0.4);background:rgba(255,80,96,0.06);}
-.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);outline:none;width:100%;border-bottom:2px solid transparent;font-family:inherit;margin-bottom:10px;}
-.inp{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:10px;padding:10px 12px;color:var(--text);font-size:0.9em;font-weight:700;width:100%;outline:none;}
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+.icard{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;}
+.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);width:100%;border-bottom:2px solid transparent;margin-bottom:10px;}
+.inp{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:10px;padding:10px;color:var(--text);font-weight:700;width:100%;outline:none;}
 
 /* TUR SİSTEMİ CSS */
-.tour-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;}
-.tour-box{background:#111827;border:2px solid var(--blue);border-radius:20px;padding:24px;width:320px;box-shadow:0 10px 40px rgba(0,0,0,0.8);z-index:2001;}
-.tour-hl{position:fixed;z-index:1999;border-radius:15px;box-shadow:0 0 0 1000px rgba(0,0,0,0.85),0 0 0 4px var(--blue);pointer-events:none;transition:0.3s;}
+.tour-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;}
+.tour-box{background:#111827;border:2px solid var(--blue);border-radius:20px;padding:25px;width:320px;box-shadow:0 10px 40px rgba(0,0,0,0.8);}
+.tour-hl{position:fixed;z-index:1999;border-radius:15px;box-shadow:0 0 0 1000px rgba(0,0,0,0.8),0 0 0 4px var(--blue);pointer-events:none;}
 
-.overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,8,18,0.88);display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,8,18,0.9);display:none;align-items:center;justify-content:center;}
 .overlay.on{display:flex;}
-.modal{background:#111827;border:1px solid var(--b2);border-radius:22px;padding:28px;max-width:420px;width:92%;}
+.modal{background:#111827;border:1px solid var(--b2);border-radius:22px;padding:30px;width:90%;max-width:400px;text-align:center;}
 </style>
 </head>
 <body>
 
 <div class="orbs">
-  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div>
+  <div class="orb orb1"></div><div class="orb orb2"></div>
 </div>
 <div class="mesh"></div>
 
 <div id="tour-overlay" class="tour-overlay">
-    <div class="tour-box">
-        <h3 id="tour-title" style="margin-bottom:10px;color:var(--blue);">Başlayalım</h3>
-        <p id="tour-desc" style="font-size:0.85em;color:var(--t2);line-height:1.5;margin-bottom:20px;"></p>
-        <div style="display:flex;justify-content:space-between;">
-            <button onclick="endTour()" style="background:transparent;border:0;color:var(--t3);cursor:pointer;">Atla</button>
-            <button onclick="nextTour()" style="background:var(--blue);border:0;padding:8px 16px;border-radius:8px;color:white;font-weight:bold;cursor:pointer;">İleri →</button>
-        </div>
+  <div class="tour-box">
+    <h3 id="tour-title" style="margin-bottom:10px;color:var(--blue);">Hoş Geldin Recep!</h3>
+    <p id="tour-desc" style="font-size:0.85em;color:var(--t2);line-height:1.5;margin-bottom:20px;"></p>
+    <div style="display:flex;justify-content:space-between;">
+      <button onclick="endTour()" style="background:transparent;border:0;color:var(--t3);cursor:pointer;">Atla</button>
+      <button onclick="nextTour()" style="background:var(--blue);border:0;padding:8px 16px;border-radius:8px;color:white;font-weight:bold;cursor:pointer;">İleri →</button>
     </div>
+  </div>
 </div>
 <div id="tour-hl" class="tour-hl" style="display:none;"></div>
 
 <div class="overlay" id="m-order">
-  <div class="modal"><h2>✅ Siparişi Onayla</h2><p style="margin:15px 0;font-size:0.95em;color:var(--t2);">52 KAP sipariş stoğa eklenecek.</p>
-  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-order')">Vazgeç</button><button class="btn btn-green" onclick="doOrder()">Ekle</button></div></div>
-</div>
-
-<div class="overlay" id="m-reset">
-  <div class="modal"><h2>⚠️ Sıfırla</h2><p style="margin:15px 0;font-size:0.95em;color:var(--t2);">Tüm stok verileri silinecek!</p>
-  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-reset')">Vazgeç</button><button class="btn btn-red" style="background:var(--red);color:white" onclick="doReset()">Sıfırla</button></div></div>
+  <div class="modal"><h2>Siparişi Onayla</h2><p style="margin:20px 0;color:var(--t2);">52 KAP sipariş stoğa eklenecek.</p>
+  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-order')">Vazgeç</button><button class="btn btn-green" onclick="doOrder()">Onayla</button></div></div>
 </div>
 
 <div class="app">
-  <div class="header" id="el-header">
+  <div class="header">
     <div class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Batarya Stok Takip</span></div>
     <div class="header-right">
       <div class="hclock" id="clk">00:00:00</div>
-      <button class="hbtn red" onclick="openM('m-reset')">🗑 Sıfırla</button>
+      <button class="hbtn red" onclick="localStorage.clear(); location.reload();">🗑 Sıfırla</button>
     </div>
   </div>
 
@@ -151,17 +131,17 @@ body::before{
         <div class="clbl"><span class="pip"></span> Stok Verimliliği</div>
         <div class="eff-block">
           <div class="eff-circle">
-            <svg viewBox="0 0 72 72" style="transform:rotate(-90deg);"><circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/><circle id="effArc" cx="36" cy="36" r="28" fill="none" stroke="#4fa8ff" stroke-width="6" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176" style="transition:0.8s;"/></svg>
-            <div class="eff-num" id="effNum">0</div><div class="eff-pct">%</div>
+            <svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/><circle id="effArc" cx="36" cy="36" r="28" fill="none" stroke="#4fa8ff" stroke-width="6" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176" style="transition:0.8s;"/></svg>
+            <div class="eff-num" id="effNum">0</div>
           </div>
-          <div class="eff-info"><div class="title" id="effTitle">Hesaplanıyor</div><div class="sub" id="effSub">—</div></div>
+          <div class="eff-info"><div class="title" id="effTitle">Analiz...</div></div>
         </div>
         <div class="metrics">
           <div class="met"><div class="met-val" id="mProd" style="color:var(--green)">0</div><div class="met-lbl">Üretilebilir</div></div>
           <div class="met"><div class="met-val" id="mTot" style="color:var(--blue)">0</div><div class="met-lbl">Toplam KAP</div></div>
         </div>
         <div id="barArea"></div>
-        <div class="sep" style="height:1px;background:var(--b1);margin:14px 0;"></div>
+        <div style="height:1px;background:var(--b1);margin:14px 0;"></div>
         <div class="clbl" id="el-siparis"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
         <div id="orderArea"></div>
         <button class="btn btn-wa" onclick="shareWA()">💬 WhatsApp ile Paylaş</button>
@@ -177,9 +157,9 @@ body::before{
       <div id="tab-inventory" class="tab on"><div class="inv-grid" id="invGrid"></div></div>
       <div id="tab-target" class="tab">
         <div class="card">
-            <div class="clbl">Hedeflenen Batarya</div>
-            <input type="number" id="targetInput" class="inp" value="100" oninput="calculate()">
-            <div id="targetArea" style="margin-top:20px;"></div>
+          <div class="clbl">Hedeflenen Batarya</div>
+          <input type="number" id="targetInput" class="inp" value="100" oninput="calculate()">
+          <div id="targetArea" style="margin-top:20px;"></div>
         </div>
       </div>
     </div>
@@ -187,8 +167,7 @@ body::before{
 </div>
 
 <script>
-// 1. VERİ SİSTEMİ
-let state = JSON.parse(localStorage.getItem('bat_tracker_github_v1')) || {
+let state = JSON.parse(localStorage.getItem('bat_v82_final')) || {
     levels: [
         { id: 1, name: 'AE', stock: 40, perBox: 12, perBat: 4, color: 'var(--blue)' },
         { id: 2, name: 'FE', stock: 69, perBox: 6, perBat: 2, color: 'var(--green)' },
@@ -197,7 +176,6 @@ let state = JSON.parse(localStorage.getItem('bat_tracker_github_v1')) || {
     tourDone: false
 };
 
-// 2. LOJİSTİK MOTORU (ÇİFT SAYI + 52 KAP)
 function calculate() {
     let rawCaps = state.levels.map(l => (l.stock * l.perBox) / (l.perBat || 1));
     let minProd = Math.floor(Math.min(...rawCaps));
@@ -206,86 +184,63 @@ function calculate() {
     document.getElementById('mProd').innerText = minProd;
     document.getElementById('mTot').innerText = totalKAP;
 
-    // Verimlilik
     let avg = rawCaps.reduce((a, b) => a + b, 0) / rawCaps.length;
     let eff = Math.round((minProd / avg) * 100) || 0;
-    document.getElementById('effNum').innerText = eff;
+    document.getElementById('effNum').innerText = eff + "%";
     document.getElementById('effArc').style.strokeDashoffset = 176 - (176 * eff) / 100;
+    document.getElementById('effTitle').innerText = eff > 80 ? "Dengeli" : "Dengesiz";
 
-    // Barlar
     let max = Math.max(...rawCaps) || 1;
     document.getElementById('barArea').innerHTML = state.levels.map((l, i) => `
         <div class="bar-item">
-            <div class="bar-top"><span class="bar-name">${l.name}</span><span style="font-size:0.75em;color:var(--t2)">${Math.floor(rawCaps[i])} Batarya</span></div>
+            <div class="bar-top"><span>${l.name}</span><span style="font-size:0.75em;">${Math.floor(rawCaps[i])} Batarya</span></div>
             <div class="bar-bg"><div class="bar-fill" style="width:${(rawCaps[i]/max)*100}%; background:${l.color}"></div></div>
         </div>
     `).join('');
 
-    // SİPARİŞ PLANI (ÇİFT SAYI GARANTİLİ)
     const target = 52;
     let totalW = state.levels.reduce((s, l) => s + (l.perBat/l.perBox), 0);
     let futureTotal = totalKAP + target;
     let assigned = 0;
     
     document.getElementById('orderArea').innerHTML = state.levels.map((l, i) => {
-        let order;
-        if (i < state.levels.length - 1) {
-            let ideal = (futureTotal * ((l.perBat/l.perBox)/totalW)) - l.stock;
-            order = Math.max(0, Math.round(ideal / 2) * 2);
-            assigned += order;
-        } else {
-            order = target - assigned;
-        }
-        l.lastOrder = order;
+        let order = (i < state.levels.length - 1) ? Math.max(0, Math.round(((futureTotal * ((l.perBat/l.perBox)/totalW)) - l.stock) / 2) * 2) : (target - assigned);
+        assigned += order; l.lastOrder = order;
         return `<div class="order-row"><span>${l.name}</span><span class="order-qty">+${order} KAP</span></div>`;
     }).join('');
 
-    // Hedef Planlama
     let tVal = document.getElementById('targetInput').value;
     document.getElementById('targetArea').innerHTML = state.levels.map(l => {
         let diff = Math.max(0, Math.ceil((tVal * l.perBat - l.stock * l.perBox) / l.perBox));
-        return `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85em;font-weight:600;"><span>${l.name} İçin Gereken:</span><b style="color:var(--orange)">${diff} KAP</b></div>`;
+        return `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85em;"><span>${l.name} İçin Gereken:</span><b>${diff} KAP</b></div>`;
     }).join('');
 
-    localStorage.setItem('bat_tracker_github_v1', JSON.stringify(state));
+    localStorage.setItem('bat_v82_final', JSON.stringify(state));
 }
 
-// 3. UI KONTROLLERİ
 function renderInventory() {
     document.getElementById('invGrid').innerHTML = state.levels.map(l => `
         <div class="icard">
             <input type="text" class="iname" value="${l.name}" onchange="updateL(${l.id},'name',this.value)">
-            <div style="font-size:0.75rem;color:var(--cyan);font-weight:800;margin-bottom:15px;">${l.stock} KAP / ${l.stock * l.perBox} PİL MEVCUT</div>
+            <div style="font-size:0.75rem;color:var(--cyan);font-weight:800;margin-bottom:15px;">${l.stock} KAP / ${l.stock * l.perBox} PİL</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                <div style="display:flex;flex-direction:column;gap:5px;">
-                    <label style="font-size:0.6em;font-weight:800;color:var(--t3);text-transform:uppercase;">Stok (KAP)</label>
-                    <input type="number" class="inp" value="${l.stock}" oninput="updateL(${l.id},'stock',this.value)">
-                </div>
-                <div style="display:flex;flex-direction:column;gap:5px;">
-                    <label style="font-size:0.6em;font-weight:800;color:var(--t3);text-transform:uppercase;">Birim İhtiyaç</label>
-                    <input type="number" class="inp" value="${l.perBat}" oninput="updateL(${l.id},'perBat',this.value)">
-                </div>
+                <div><label style="font-size:0.6em;color:var(--t3);">STOK (KAP)</label><input type="number" class="inp" value="${l.stock}" oninput="updateL(${l.id},'stock',this.value)"></div>
+                <div><label style="font-size:0.6em;color:var(--t3);">İHTİYAÇ</label><input type="number" class="inp" value="${l.perBat}" oninput="updateL(${l.id},'perBat',this.value)"></div>
             </div>
         </div>
     `).join('');
 }
 
-function updateL(id, f, v) { 
-    state.levels.find(x => x.id === id)[f] = f === 'name' ? v.toUpperCase() : (parseInt(v) || 0); 
-    calculate(); 
-}
-
+function updateL(id, f, v) { state.levels.find(x => x.id === id)[f] = f === 'name' ? v.toUpperCase() : (parseInt(v) || 0); calculate(); }
 function switchTab(id, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
     document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-'+id).classList.add('on');
     btn.classList.add('active');
 }
-
 function openM(id) { document.getElementById(id).classList.add('on'); }
 function closeM(id) { document.getElementById(id).classList.remove('on'); }
 function doOrder() { state.levels.forEach(l => l.stock += l.lastOrder); renderInventory(); calculate(); closeM('m-order'); }
-function doReset() { localStorage.clear(); location.reload(); }
 
 function shareWA() {
     const d = new Date().toLocaleDateString('tr-TR');
@@ -295,20 +250,14 @@ function shareWA() {
     window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
 }
 
-// 4. TUR SİSTEMİ
 let tourStep = 0;
 const tourData = [
-    { el: null, title: "Hoş Geldin Recep! 🔋", desc: "Bu sistem Ford Otosan batarya stoklarını en verimli şekilde yönetmen için hazırlandı." },
-    { el: "el-verim", title: "Verimlilik Analizi", desc: "Buradan stok dengeni ve üretimi tıkayan parçaları görsel olarak görebilirsin." },
-    { el: "el-siparis", title: "Hatasız Sipariş", desc: "Sistem senin için 52 KAP ve sevkiyata uygun 'Çift Sayı' planını otomatik hesaplar." },
-    { el: "el-tabs", title: "Stok Yönetimi", desc: "Mevcut stoklarını buradan güncelleyebilir veya hedef planlaması yapabilirsin. İsimlere tıklayarak seviye kodlarını düzenleyebilirsin." }
+    { el: null, title: "Lojistik Dashboard 🔋", desc: "Seni bekleten hatayı çözdük Recep! Şimdi sistem Ford Otosan standartlarında çalışıyor." },
+    { el: "el-verim", title: "Denge Analizi", desc: "Halkadan genel durumu, barlardan hangi parçanın eksik olduğunu görebilirsin." },
+    { el: "el-siparis", title: "Çift Sayı Kuralı", desc: "Sistem her zaman 52 KAP ve çift sayı planı yapar." }
 ];
 
-function startTour() {
-    if(state.tourDone) return;
-    document.getElementById('tour-overlay').style.display = 'flex';
-    updateTour();
-}
+function startTour() { if(!state.tourDone) { document.getElementById('tour-overlay').style.display = 'flex'; updateTour(); } }
 function nextTour() { tourStep++; if(tourStep >= tourData.length) endTour(); else updateTour(); }
 function updateTour() {
     let s = tourData[tourStep];
@@ -317,5 +266,20 @@ function updateTour() {
     if(s.el) {
         let r = document.getElementById(s.el).getBoundingClientRect();
         let hl = document.getElementById('tour-hl');
-        hl.style.display = 'block'; hl.style.top = (r.top-5)+'px'; hl.
+        hl.style.display = 'block'; hl.style.top = (r.top-5)+'px'; hl.style.left = (r.left-5)+'px';
+        hl.style.width = (r.width+10)+'px'; hl.style.height = (r.height+10)+'px';
+    } else document.getElementById('tour-hl').style.display = 'none';
+}
+function endTour() {
+    document.getElementById('tour-overlay').style.display = 'none';
+    document.getElementById('tour-hl').style.display = 'none';
+    state.tourDone = true; localStorage.setItem('bat_v82_final', JSON.stringify(state));
+}
 
+setInterval(() => { document.getElementById('clk').innerText = new Date().toLocaleTimeString('tr-TR'); }, 1000);
+renderInventory();
+calculate();
+setTimeout(startTour, 1000);
+</script>
+</body>
+</html>
