@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Batarya Stok Takip</title>
 <style>
-/* SENİN CSS KODLARIN */
+/* SENİN TASARIMININ TAMAMI */
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bg:#07090f;--s1:#0d1117;--s2:#111820;
@@ -25,10 +25,7 @@ body::before{
     radial-gradient(ellipse 35% 30% at 78% 18%,rgba(176,128,255,0.09) 0%,transparent 70%);
   animation:bg-shift 20s ease-in-out infinite alternate;
 }
-@keyframes bg-shift{
-  0%{background-position:0% 0%,100% 100%,50% 50%,80% 20%;}
-  100%{background-position:10% 5%,90% 95%,55% 45%,75% 25%;}
-}
+@keyframes bg-shift{ 0%{background-position:0% 0%,100% 100%,50% 50%,80% 20%;} 100%{background-position:10% 5%,90% 95%,55% 45%,75% 25%;} }
 
 .orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .orb{position:absolute;border-radius:50%;}
@@ -51,7 +48,7 @@ body::before{
 .logo-text{font-size:1.15em;font-weight:800;background:linear-gradient(135deg,var(--blue2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .hclock{font-size:0.78em;font-weight:700;letter-spacing:1.5px;color:var(--t2);background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:9px 16px;}
-.hbtn{background:var(--s1);border:1px solid var(--b1);border-radius:10px;color:var(--t2);padding:9px 16px;font-size:0.78em;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+.hbtn{background:var(--s1);border:1px solid var(--b1);border-radius:10px;color:var(--t2);padding:9px 16px;font-size:0.78em;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
 .hbtn.red{color:var(--red);}
 
 .card{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
@@ -97,7 +94,7 @@ body::before{
 .inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
 .icard{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;transition:all 0.25s;}
 .icard.crit{border-color:rgba(255,80,96,0.4);background:rgba(255,80,96,0.06);}
-.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);outline:none;width:100%;border-bottom:2px solid transparent;font-family:inherit;}
+.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);outline:none;width:100%;border-bottom:2px solid transparent;font-family:inherit;margin-bottom:10px;}
 .inp{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:10px;padding:10px 12px;color:var(--text);font-size:0.9em;font-weight:700;width:100%;outline:none;}
 
 /* TUR SİSTEMİ CSS */
@@ -130,17 +127,17 @@ body::before{
 <div id="tour-hl" class="tour-hl" style="display:none;"></div>
 
 <div class="overlay" id="m-order">
-  <div class="modal"><h2>✅ Onay</h2><p style="margin:15px 0;font-size:0.9em;color:var(--t2);">52 KAP sipariş stoğa eklenecek.</p>
-  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-order')">Vazgeç</button><button class="btn btn-green" onclick="doOrder()">Onayla</button></div></div>
+  <div class="modal"><h2>✅ Siparişi Onayla</h2><p style="margin:15px 0;font-size:0.95em;color:var(--t2);">52 KAP sipariş stoğa eklenecek.</p>
+  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-order')">Vazgeç</button><button class="btn btn-green" onclick="doOrder()">Ekle</button></div></div>
 </div>
 
 <div class="overlay" id="m-reset">
-  <div class="modal"><h2>⚠️ Sıfırla</h2><p style="margin:15px 0;font-size:0.9em;color:var(--t2);">Tüm veriler silinecek!</p>
+  <div class="modal"><h2>⚠️ Sıfırla</h2><p style="margin:15px 0;font-size:0.95em;color:var(--t2);">Tüm stok verileri silinecek!</p>
   <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-reset')">Vazgeç</button><button class="btn btn-red" style="background:var(--red);color:white" onclick="doReset()">Sıfırla</button></div></div>
 </div>
 
 <div class="app">
-  <div class="header">
+  <div class="header" id="el-header">
     <div class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Batarya Stok Takip</span></div>
     <div class="header-right">
       <div class="hclock" id="clk">00:00:00</div>
@@ -149,7 +146,7 @@ body::before{
   </div>
 
   <div class="grid">
-    <div class="sidebar" id="el-sidebar">
+    <div class="sidebar">
       <div class="card" id="el-verim">
         <div class="clbl"><span class="pip"></span> Stok Verimliliği</div>
         <div class="eff-block">
@@ -164,7 +161,7 @@ body::before{
           <div class="met"><div class="met-val" id="mTot" style="color:var(--blue)">0</div><div class="met-lbl">Toplam KAP</div></div>
         </div>
         <div id="barArea"></div>
-        <div class="sep"></div>
+        <div class="sep" style="height:1px;background:var(--b1);margin:14px 0;"></div>
         <div class="clbl" id="el-siparis"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
         <div id="orderArea"></div>
         <button class="btn btn-wa" onclick="shareWA()">💬 WhatsApp ile Paylaş</button>
@@ -191,7 +188,7 @@ body::before{
 
 <script>
 // 1. VERİ SİSTEMİ
-let state = JSON.parse(localStorage.getItem('bat_tracker_final')) || {
+let state = JSON.parse(localStorage.getItem('bat_tracker_github_v1')) || {
     levels: [
         { id: 1, name: 'AE', stock: 40, perBox: 12, perBat: 4, color: 'var(--blue)' },
         { id: 2, name: 'FE', stock: 69, perBox: 6, perBat: 2, color: 'var(--green)' },
@@ -200,7 +197,7 @@ let state = JSON.parse(localStorage.getItem('bat_tracker_final')) || {
     tourDone: false
 };
 
-// 2. LOJİSTİK MOTORU (Çift Sayı + 52 KAP)
+// 2. LOJİSTİK MOTORU (ÇİFT SAYI + 52 KAP)
 function calculate() {
     let rawCaps = state.levels.map(l => (l.stock * l.perBox) / (l.perBat || 1));
     let minProd = Math.floor(Math.min(...rawCaps));
@@ -219,7 +216,7 @@ function calculate() {
     let max = Math.max(...rawCaps) || 1;
     document.getElementById('barArea').innerHTML = state.levels.map((l, i) => `
         <div class="bar-item">
-            <div class="bar-top"><span class="bar-name">${l.name}</span><span style="font-size:0.7em">${Math.floor(rawCaps[i])} Batarya</span></div>
+            <div class="bar-top"><span class="bar-name">${l.name}</span><span style="font-size:0.75em;color:var(--t2)">${Math.floor(rawCaps[i])} Batarya</span></div>
             <div class="bar-bg"><div class="bar-fill" style="width:${(rawCaps[i]/max)*100}%; background:${l.color}"></div></div>
         </div>
     `).join('');
@@ -247,33 +244,44 @@ function calculate() {
     let tVal = document.getElementById('targetInput').value;
     document.getElementById('targetArea').innerHTML = state.levels.map(l => {
         let diff = Math.max(0, Math.ceil((tVal * l.perBat - l.stock * l.perBox) / l.perBox));
-        return `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85em;"><span>${l.name} İçin Gereken:</span><b>${diff} KAP</b></div>`;
+        return `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85em;font-weight:600;"><span>${l.name} İçin Gereken:</span><b style="color:var(--orange)">${diff} KAP</b></div>`;
     }).join('');
 
-    localStorage.setItem('bat_tracker_final', JSON.stringify(state));
+    localStorage.setItem('bat_tracker_github_v1', JSON.stringify(state));
 }
 
 // 3. UI KONTROLLERİ
 function renderInventory() {
     document.getElementById('invGrid').innerHTML = state.levels.map(l => `
-        <div class="icard ${l.stock < 10 ? 'crit' : ''}">
+        <div class="icard">
             <input type="text" class="iname" value="${l.name}" onchange="updateL(${l.id},'name',this.value)">
-            <div style="font-size:0.7rem;color:var(--cyan);font-weight:800;margin:10px 0;">${l.stock} KAP / ${l.stock * l.perBox} PİL MEVCUT</div>
-            <div class="inp-grid">
-                <div class="inp-wrap"><label class="clbl" style="font-size:0.5em">Stok (KAP)</label><input type="number" class="inp" value="${l.stock}" oninput="updateL(${l.id},'stock',this.value)"></div>
-                <div class="inp-wrap"><label class="clbl" style="font-size:0.5em">Birim İhtiyaç</label><input type="number" class="inp" value="${l.perBat}" oninput="updateL(${l.id},'perBat',this.value)"></div>
+            <div style="font-size:0.75rem;color:var(--cyan);font-weight:800;margin-bottom:15px;">${l.stock} KAP / ${l.stock * l.perBox} PİL MEVCUT</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                    <label style="font-size:0.6em;font-weight:800;color:var(--t3);text-transform:uppercase;">Stok (KAP)</label>
+                    <input type="number" class="inp" value="${l.stock}" oninput="updateL(${l.id},'stock',this.value)">
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                    <label style="font-size:0.6em;font-weight:800;color:var(--t3);text-transform:uppercase;">Birim İhtiyaç</label>
+                    <input type="number" class="inp" value="${l.perBat}" oninput="updateL(${l.id},'perBat',this.value)">
+                </div>
             </div>
         </div>
     `).join('');
 }
 
-function updateL(id, f, v) { state.levels.find(x => x.id === id)[f] = f === 'name' ? v.toUpperCase() : parseInt(v) || 0; calculate(); }
+function updateL(id, f, v) { 
+    state.levels.find(x => x.id === id)[f] = f === 'name' ? v.toUpperCase() : (parseInt(v) || 0); 
+    calculate(); 
+}
+
 function switchTab(id, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
     document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-'+id).classList.add('on');
     btn.classList.add('active');
 }
+
 function openM(id) { document.getElementById(id).classList.add('on'); }
 function closeM(id) { document.getElementById(id).classList.remove('on'); }
 function doOrder() { state.levels.forEach(l => l.stock += l.lastOrder); renderInventory(); calculate(); closeM('m-order'); }
@@ -291,9 +299,9 @@ function shareWA() {
 let tourStep = 0;
 const tourData = [
     { el: null, title: "Hoş Geldin Recep! 🔋", desc: "Bu sistem Ford Otosan batarya stoklarını en verimli şekilde yönetmen için hazırlandı." },
-    { el: "el-verim", title: "Verimlilik Analizi", desc: "Buradan stok dengeni ve üretimi tıkayan parçaları görebilirsin." },
-    { el: "el-siparis", title: "Akıllı Sipariş", desc: "Sistem senin için 52 KAP ve çift sayı kuralına uygun siparişi otomatik hesaplar." },
-    { el: "el-tabs", title: "Yönetim", desc: "Stoklarını buradan güncelleyebilir veya hedef planlaması yapabilirsin. Seviye isimlerine tıklayarak değiştirebilirsin." }
+    { el: "el-verim", title: "Verimlilik Analizi", desc: "Buradan stok dengeni ve üretimi tıkayan parçaları görsel olarak görebilirsin." },
+    { el: "el-siparis", title: "Hatasız Sipariş", desc: "Sistem senin için 52 KAP ve sevkiyata uygun 'Çift Sayı' planını otomatik hesaplar." },
+    { el: "el-tabs", title: "Stok Yönetimi", desc: "Mevcut stoklarını buradan güncelleyebilir veya hedef planlaması yapabilirsin. İsimlere tıklayarak seviye kodlarını düzenleyebilirsin." }
 ];
 
 function startTour() {
@@ -309,15 +317,5 @@ function updateTour() {
     if(s.el) {
         let r = document.getElementById(s.el).getBoundingClientRect();
         let hl = document.getElementById('tour-hl');
-        hl.style.display = 'block'; hl.style.top = (r.top-5)+'px'; hl.style.left = (r.left-5)+'px';
-        hl.style.width = (r.width+10)+'px'; hl.style.height = (r.height+10)+'px';
-    } else document.getElementById('tour-hl').style.display = 'none';
-}
-function endTour() {
-    document.getElementById('tour-overlay').style.display = 'none';
-    document.getElementById('tour-hl').style.display = 'none';
-    state.tourDone = true; localStorage.setItem('bat_tracker_final', JSON.stringify(state));
-}
+        hl.style.display = 'block'; hl.style.top = (r.top-5)+'px'; hl.
 
-// BAŞLAT
-setInterval(() => { document.getElementById('clk')
