@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Batarya Stok Takip</title>
 <style>
+/* SENİN CSS KODLARIN */
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bg:#07090f;--s1:#0d1117;--s2:#111820;
@@ -15,7 +16,6 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-/* ARKA PLAN - Sadece CSS animasyonu */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
@@ -30,34 +30,21 @@ body::before{
   100%{background-position:10% 5%,90% 95%,55% 45%,75% 25%;}
 }
 
-/* ORB'lar - Sadece CSS */
 .orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .orb{position:absolute;border-radius:50%;}
-.orb1{width:600px;height:600px;top:-15%;left:-10%;
-  background:radial-gradient(circle,rgba(79,168,255,0.15) 0%,transparent 65%);
-  animation:float1 18s ease-in-out infinite;}
-.orb2{width:500px;height:500px;top:40%;right:-8%;
-  background:radial-gradient(circle,rgba(0,212,200,0.13) 0%,transparent 65%);
-  animation:float2 22s ease-in-out infinite;}
-.orb3{width:420px;height:420px;bottom:-8%;left:28%;
-  background:radial-gradient(circle,rgba(0,224,144,0.12) 0%,transparent 65%);
-  animation:float3 16s ease-in-out infinite;}
-.orb4{width:300px;height:300px;top:20%;left:55%;
-  background:radial-gradient(circle,rgba(176,128,255,0.10) 0%,transparent 65%);
-  animation:float4 24s ease-in-out infinite;}
+.orb1{width:600px;height:600px;top:-15%;left:-10%; background:radial-gradient(circle,rgba(79,168,255,0.15) 0%,transparent 65%); animation:float1 18s ease-in-out infinite;}
+.orb2{width:500px;height:500px;top:40%;right:-8%; background:radial-gradient(circle,rgba(0,212,200,0.13) 0%,transparent 65%); animation:float2 22s ease-in-out infinite;}
+.orb3{width:420px;height:420px;bottom:-8%;left:28%; background:radial-gradient(circle,rgba(0,224,144,0.12) 0%,transparent 65%); animation:float3 16s ease-in-out infinite;}
+.orb4{width:300px;height:300px;top:20%;left:55%; background:radial-gradient(circle,rgba(176,128,255,0.10) 0%,transparent 65%); animation:float4 24s ease-in-out infinite;}
 @keyframes float1{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,-30px);}}
 @keyframes float2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,25px);}}
 @keyframes float3{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-20px);}}
 @keyframes float4{0%,100%{transform:translate(0,0);}50%{transform:translate(-25px,30px);}}
 
-.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.02;
-  background-image:linear-gradient(rgba(100,160,255,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(100,160,255,0.8) 1px,transparent 1px);
-  background-size:55px 55px;}
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.02; background-image:linear-gradient(rgba(100,160,255,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(100,160,255,0.8) 1px,transparent 1px); background-size:55px 55px;}
 
-/* APP */
 .app{position:relative;z-index:1;max-width:1560px;margin:0 auto;padding:0 32px 80px;}
 
-/* HEADER */
 .header{display:flex;align-items:center;justify-content:space-between;padding:26px 0 28px;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--b1);margin-bottom:28px;}
 .logo{display:flex;align-items:center;gap:12px;}
 .logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1a6ef5,#00d4c8);display:flex;align-items:center;justify-content:center;font-size:1.2em;box-shadow:0 4px 20px rgba(26,110,245,0.5);}
@@ -65,246 +52,272 @@ body::before{
 .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .hclock{font-size:0.78em;font-weight:700;letter-spacing:1.5px;color:var(--t2);background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:9px 16px;}
 .hbtn{background:var(--s1);border:1px solid var(--b1);border-radius:10px;color:var(--t2);padding:9px 16px;font-size:0.78em;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
-.hbtn:hover{background:var(--s2);color:var(--text);border-color:var(--b2);}
 .hbtn.red{color:var(--red);}
-.hbtn.red:hover{background:rgba(255,80,96,0.1);}
 
-/* CARD */
 .card{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;border-radius:22px 22px 0 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);}
 .clbl{font-size:0.67em;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
 .pip{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;}
-.pip.g{background:var(--green);}
-.pip.r{background:var(--red);}
-.pip.p{background:var(--purple);}
 
-/* LAYOUT */
 .grid{display:grid;grid-template-columns:400px 1fr;gap:22px;align-items:start;}
 @media(max-width:1100px){.grid{grid-template-columns:1fr;}}
 .sidebar{display:flex;flex-direction:column;gap:14px;}
 @media(min-width:1100px){.sidebar{position:sticky;top:22px;max-height:calc(100vh - 44px);overflow-y:auto;scrollbar-width:thin;}}
 
-/* VERİMLİLİK */
 .eff-block{display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--b1);margin-bottom:16px;}
 .eff-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;flex-shrink:0;}
 .eff-circle svg{position:absolute;inset:0;width:100%;height:100%;}
 .eff-num{position:relative;z-index:1;font-size:1.05em;font-weight:900;line-height:1;}
 .eff-pct{position:relative;z-index:1;font-size:0.45em;color:var(--t2);}
-.eff-info .title{font-size:0.92em;font-weight:700;margin-bottom:3px;}
-.eff-info .sub{font-size:0.72em;color:var(--t2);}
 
-/* METRİKLER */
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
 .met{background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:13px 8px;text-align:center;position:relative;overflow:hidden;}
-.met::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.met.bl::after{background:linear-gradient(90deg,var(--blue),var(--cyan));}
-.met.gr::after{background:linear-gradient(90deg,var(--green2),var(--green));}
-.met.rd::after{background:linear-gradient(90deg,var(--red),var(--orange));}
 .met-val{font-size:1.8em;font-weight:900;line-height:1;}
-.met.bl .met-val{color:var(--blue2);}
-.met.gr .met-val{color:var(--green);}
-.met.rd .met-val{color:var(--red);}
 .met-lbl{font-size:0.58em;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;}
 
-/* BARLAR */
 .bar-item{margin-bottom:11px;}
 .bar-top{display:flex;justify-content:space-between;margin-bottom:5px;}
 .bar-name{font-size:0.82em;font-weight:700;display:flex;align-items:center;gap:7px;}
-.bdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.bar-right{font-size:0.7em;color:var(--t2);}
 .bar-bg{height:7px;border-radius:4px;background:rgba(255,255,255,0.06);overflow:hidden;}
 .bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
 
-/* SİPARİŞ */
-.sep{height:1px;background:var(--b1);margin:14px 0;}
 .order-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:11px;margin-bottom:6px;}
-.order-name{font-size:0.86em;font-weight:700;display:flex;align-items:center;gap:8px;}
-.order-r{display:flex;align-items:center;gap:7px;}
-.order-sim{font-size:0.67em;color:var(--t3);}
 .order-qty{font-size:0.8em;font-weight:800;background:rgba(0,224,144,0.1);color:var(--green);border:1px solid rgba(0,224,144,0.2);padding:3px 10px;border-radius:7px;}
 .order-total{margin-top:10px;padding:10px 14px;background:rgba(0,224,144,0.07);border:1px solid rgba(0,224,144,0.15);border-radius:11px;display:flex;justify-content:space-between;align-items:center;}
-.order-total .tl{font-size:0.72em;color:var(--t2);}
-.order-total .tv{font-size:1.05em;font-weight:900;color:var(--green);}
 
-/* BUTONLAR */
 .btn{width:100%;padding:13px;border-radius:13px;border:none;font-family:inherit;font-size:0.88em;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;margin-top:8px;}
-.btn-green{background:linear-gradient(135deg,var(--green2),var(--green));color:#001a0f;box-shadow:0 4px 20px rgba(0,224,144,0.2);}
-.btn-green:hover{box-shadow:0 8px 28px rgba(0,224,144,0.35);}
-.btn-wa{background:linear-gradient(135deg,#128c3b,#25D366);color:#fff;box-shadow:0 4px 16px rgba(37,211,102,0.2);}
+.btn-green{background:linear-gradient(135deg,var(--green2),var(--green));color:#001a0f;}
+.btn-wa{background:linear-gradient(135deg,#128c3b,#25D366);color:#fff;}
 
-/* TABS */
 .tabs{display:flex;gap:3px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:4px;margin-bottom:18px;}
-.tbtn{flex:1;padding:10px 12px;border-radius:10px;border:none;font-family:inherit;font-size:0.8em;font-weight:700;cursor:pointer;color:var(--t3);background:transparent;transition:all 0.2s;}
+.tbtn{flex:1;padding:10px 12px;border-radius:10px;border:none;font-family:inherit;font-size:0.8em;font-weight:700;cursor:pointer;color:var(--t3);background:transparent;}
 .tbtn.active{background:rgba(255,255,255,0.07);color:var(--text);border:1px solid var(--b1);}
-.tab{display:none;}
-.tab.on{display:block;}
+.tab{display:none;}.tab.on{display:block;}
 
-/* STOK KARTLARI */
 .inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
-.icard{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;transition:all 0.25s;position:relative;box-shadow:0 2px 16px rgba(0,0,0,0.25);}
-.icard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;border-radius:22px 22px 0 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);}
-.icard:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.35);}
+.icard{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;transition:all 0.25s;}
 .icard.crit{border-color:rgba(255,80,96,0.4);background:rgba(255,80,96,0.06);}
-.icard.neck{border-color:rgba(255,170,64,0.35);background:rgba(255,170,64,0.05);}
-.icard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
-.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);outline:none;width:100px;border-bottom:2px solid transparent;transition:0.2s;font-family:inherit;padding:2px 0;}
-.iname:focus{border-bottom-color:var(--blue);}
-.isub{font-size:0.72em;color:var(--t2);margin-top:5px;}
-.badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
-.badge{font-size:0.62em;font-weight:800;padding:3px 9px;border-radius:20px;}
-.b-cap{background:rgba(79,168,255,0.1);color:var(--blue2);border:1px solid rgba(79,168,255,0.2);}
-.b-crit{background:rgba(255,80,96,0.1);color:var(--red);border:1px solid rgba(255,80,96,0.2);}
-.b-neck{background:rgba(255,170,64,0.1);color:var(--orange);border:1px solid rgba(255,170,64,0.2);}
-.inp-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-.inp-wrap{display:flex;flex-direction:column;gap:4px;}
-.inp-lbl{font-size:0.61em;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px;}
-.inp{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:10px;padding:10px 12px;color:var(--text);font-size:0.9em;font-weight:700;width:100%;outline:none;transition:0.2s;font-family:inherit;}
-.inp:focus{border-color:var(--blue);background:rgba(79,168,255,0.08);}
-.ifoot{display:flex;gap:7px;margin-top:13px;}
-.sm-btn{background:rgba(255,255,255,0.05);border:1px solid var(--b1);color:var(--t2);padding:7px 12px;border-radius:9px;cursor:pointer;font-size:0.75em;font-weight:700;font-family:inherit;transition:all 0.2s;}
-.sm-btn:hover{border-color:var(--b2);color:var(--text);}
-.sm-btn.del{color:var(--red);}
-.sm-btn.del:hover{background:rgba(255,80,96,0.1);}
-.add-card{background:transparent;border:2px dashed var(--b2);border-radius:22px;padding:28px;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--t3);transition:all 0.2s;}
-.add-card:hover{border-color:var(--blue);color:var(--blue);}
+.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);outline:none;width:100%;border-bottom:2px solid transparent;font-family:inherit;}
+.inp{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:10px;padding:10px 12px;color:var(--text);font-size:0.9em;font-weight:700;width:100%;outline:none;}
 
-/* HEDEF */
-.trow{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--b1);border-radius:11px;margin-bottom:7px;}
-.trow-n{font-size:0.85em;font-weight:600;}
-.trow-v{font-size:0.85em;font-weight:800;color:var(--orange);}
-.trow-v.ok{color:var(--green);}
-.target-wrap{position:relative;margin-bottom:16px;}
-.target-wrap input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:12px;padding:13px 44px 13px 16px;color:var(--text);font-size:1.05em;font-weight:800;outline:none;transition:0.2s;font-family:inherit;}
-.target-wrap input:focus{border-color:var(--blue);}
-.target-wrap .ico{position:absolute;right:14px;top:50%;transform:translateY(-50%);}
+/* TUR SİSTEMİ CSS */
+.tour-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;}
+.tour-box{background:#111827;border:2px solid var(--blue);border-radius:20px;padding:24px;width:320px;box-shadow:0 10px 40px rgba(0,0,0,0.8);z-index:2001;}
+.tour-hl{position:fixed;z-index:1999;border-radius:15px;box-shadow:0 0 0 1000px rgba(0,0,0,0.85),0 0 0 4px var(--blue);pointer-events:none;transition:0.3s;}
 
-/* GEÇMİŞ */
-.hist{padding:11px 13px;background:rgba(255,255,255,0.03);border:1px solid var(--b1);border-radius:11px;margin-bottom:6px;}
-.hist-date{font-size:0.68em;color:var(--t3);margin-bottom:5px;}
-.hist-tags{display:flex;flex-wrap:wrap;gap:4px;}
-.hist-tag{font-size:0.7em;font-weight:700;padding:2px 8px;background:rgba(79,168,255,0.08);color:var(--blue2);border:1px solid rgba(79,168,255,0.15);border-radius:6px;}
-.empty{font-size:0.82em;color:var(--t3);text-align:center;padding:20px;}
-
-/* MODAL */
-.overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,8,18,0.88);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;}
-.overlay.on{opacity:1;pointer-events:all;}
-.modal{background:#111827;border:1px solid var(--b2);border-radius:22px;padding:28px;max-width:420px;width:92%;box-shadow:0 24px 60px rgba(0,0,0,0.6);}
-.modal h2{font-size:1.1em;font-weight:800;margin-bottom:8px;}
-.modal p{font-size:0.84em;color:var(--t2);margin-bottom:20px;line-height:1.55;}
-.mbtns{display:flex;gap:9px;}
-.mbtn{flex:1;padding:12px;border-radius:11px;border:none;font-family:inherit;font-size:0.87em;font-weight:700;cursor:pointer;}
-.mbtn-c{background:rgba(255,255,255,0.06);color:var(--t2);border:1px solid var(--b1);}
-.mbtn-ok{background:linear-gradient(135deg,var(--green2),var(--green));color:#001a0f;}
-.mbtn-red{background:linear-gradient(135deg,#b91c1c,var(--red));color:#fff;}
-.exp-area{background:rgba(0,0,0,0.4);border:1px solid var(--b1);border-radius:10px;padding:12px;font-size:0.72em;color:var(--t2);white-space:pre-wrap;max-height:175px;overflow-y:auto;margin-bottom:14px;font-family:monospace;line-height:1.6;}
-.imp-ta{width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--b1);border-radius:10px;padding:11px;color:var(--text);font-size:0.78em;min-height:85px;outline:none;resize:vertical;margin-bottom:12px;font-family:monospace;}
-.imp-ta:focus{border-color:var(--blue);}
-
-/* TOAST */
-.toast{position:fixed;top:20px;right:20px;z-index:2000;background:#111827;border:1px solid var(--b2);border-radius:13px;padding:13px 18px;font-size:0.82em;font-weight:700;box-shadow:0 12px 32px rgba(0,0,0,0.5);display:flex;align-items:center;gap:9px;max-width:290px;transform:translateX(120%);transition:transform 0.35s ease;}
-.toast.on{transform:translateX(0);}
-.toast.s{border-left:3px solid var(--green);}
-.toast.i{border-left:3px solid var(--blue);}
-.toast.w{border-left:3px solid var(--orange);}
-
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px;}
-
-@media(min-width:1400px){
-  .grid{grid-template-columns:430px 1fr;gap:26px;}
-  .inv-grid{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px;}
-  .card,.icard{padding:26px;}
-}
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,8,18,0.88);display:none;align-items:center;justify-content:center;}
+.overlay.on{display:flex;}
+.modal{background:#111827;border:1px solid var(--b2);border-radius:22px;padding:28px;max-width:420px;width:92%;}
 </style>
 </head>
 <body>
 
 <div class="orbs">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-  <div class="orb orb4"></div>
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div>
 </div>
 <div class="mesh"></div>
 
-<div class="toast" id="toast"></div>
+<div id="tour-overlay" class="tour-overlay">
+    <div class="tour-box">
+        <h3 id="tour-title" style="margin-bottom:10px;color:var(--blue);">Başlayalım</h3>
+        <p id="tour-desc" style="font-size:0.85em;color:var(--t2);line-height:1.5;margin-bottom:20px;"></p>
+        <div style="display:flex;justify-content:space-between;">
+            <button onclick="endTour()" style="background:transparent;border:0;color:var(--t3);cursor:pointer;">Atla</button>
+            <button onclick="nextTour()" style="background:var(--blue);border:0;padding:8px 16px;border-radius:8px;color:white;font-weight:bold;cursor:pointer;">İleri →</button>
+        </div>
+    </div>
+</div>
+<div id="tour-hl" class="tour-hl" style="display:none;"></div>
 
 <div class="overlay" id="m-order">
-  <div class="modal"><h2>✅ Siparişi Onayla</h2><p>Hesaplanan miktarlar stoğa eklenecek ve geçmişe kaydedilecek.</p>
-  <div class="mbtns"><button class="mbtn mbtn-c" onclick="closeM('m-order')">Vazgeç</button><button class="mbtn mbtn-ok" onclick="doOrder()">Ekle</button></div></div>
+  <div class="modal"><h2>✅ Onay</h2><p style="margin:15px 0;font-size:0.9em;color:var(--t2);">52 KAP sipariş stoğa eklenecek.</p>
+  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-order')">Vazgeç</button><button class="btn btn-green" onclick="doOrder()">Onayla</button></div></div>
 </div>
+
 <div class="overlay" id="m-reset">
-  <div class="modal"><h2>⚠️ Sıfırla</h2><p>Tüm stok verileri ve sipariş geçmişi silinecek. Geri alınamaz!</p>
-  <div class="mbtns"><button class="mbtn mbtn-c" onclick="closeM('m-reset')">Vazgeç</button><button class="mbtn mbtn-red" onclick="doReset()">Sıfırla</button></div></div>
-</div>
-<div class="overlay" id="m-exp">
-  <div class="modal"><h2>📤 Dışa Aktar</h2><p>Bu veriyi kopyalayıp başka cihazda yükleyebilirsiniz.</p>
-  <div class="exp-area" id="expArea"></div>
-  <div class="mbtns"><button class="mbtn mbtn-c" onclick="closeM('m-exp')">Kapat</button><button class="mbtn mbtn-ok" onclick="doCopy()">Kopyala</button></div></div>
-</div>
-<div class="overlay" id="m-imp">
-  <div class="modal"><h2>📥 İçe Aktar</h2><p>Dışa aktarılan JSON verisini yapıştırın.</p>
-  <textarea class="imp-ta" id="impArea" placeholder='{"levels":[...]}'></textarea>
-  <div class="mbtns"><button class="mbtn mbtn-c" onclick="closeM('m-imp')">Vazgeç</button><button class="mbtn mbtn-ok" onclick="doImport()">Yükle</button></div></div>
+  <div class="modal"><h2>⚠️ Sıfırla</h2><p style="margin:15px 0;font-size:0.9em;color:var(--t2);">Tüm veriler silinecek!</p>
+  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-reset')">Vazgeç</button><button class="btn btn-red" style="background:var(--red);color:white" onclick="doReset()">Sıfırla</button></div></div>
 </div>
 
 <div class="app">
   <div class="header">
-    <div class="logo">
-      <div class="logo-icon">⚡</div>
-      <span class="logo-text">Batarya Stok Takip</span>
-    </div>
+    <div class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Batarya Stok Takip</span></div>
     <div class="header-right">
-      <div class="hclock" id="clk">--:--:--</div>
-      <button class="hbtn" onclick="openExp()">📤 Dışa Aktar</button>
-      <button class="hbtn" onclick="openM('m-imp')">📥 İçe Al</button>
+      <div class="hclock" id="clk">00:00:00</div>
       <button class="hbtn red" onclick="openM('m-reset')">🗑 Sıfırla</button>
     </div>
   </div>
 
   <div class="grid">
-    <div class="sidebar">
-      <div class="card">
+    <div class="sidebar" id="el-sidebar">
+      <div class="card" id="el-verim">
         <div class="clbl"><span class="pip"></span> Stok Verimliliği</div>
         <div class="eff-block">
           <div class="eff-circle">
-            <svg viewBox="0 0 72 72" style="position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);">
-              <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
-              <circle id="effArc" cx="36" cy="36" r="28" fill="none" stroke="#4fa8ff" stroke-width="6"
-                stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176"
-                style="transition:stroke-dashoffset 1s ease,stroke 0.5s;"/>
-            </svg>
-            <div class="eff-num" id="effNum">0</div>
-            <div class="eff-pct">%</div>
+            <svg viewBox="0 0 72 72" style="transform:rotate(-90deg);"><circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/><circle id="effArc" cx="36" cy="36" r="28" fill="none" stroke="#4fa8ff" stroke-width="6" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176" style="transition:0.8s;"/></svg>
+            <div class="eff-num" id="effNum">0</div><div class="eff-pct">%</div>
           </div>
-          <div class="eff-info">
-            <div class="title" id="effTitle">Hesaplanıyor</div>
-            <div class="sub" id="effSub">—</div>
-          </div>
+          <div class="eff-info"><div class="title" id="effTitle">Hesaplanıyor</div><div class="sub" id="effSub">—</div></div>
         </div>
         <div class="metrics">
-          <div class="met gr"><div class="met-val" id="mProd">0</div><div class="met-lbl">🔋 Üretilebilir</div></div>
-          <div class="met bl"><div class="met-val" id="mTot">0</div><div class="met-lbl">📦 Toplam KAP</div></div>
-          <div class="met rd"><div class="met-val" id="mCrit">0</div><div class="met-lbl">⚠ Kritik</div></div>
+          <div class="met"><div class="met-val" id="mProd" style="color:var(--green)">0</div><div class="met-lbl">Üretilebilir</div></div>
+          <div class="met"><div class="met-val" id="mTot" style="color:var(--blue)">0</div><div class="met-lbl">Toplam KAP</div></div>
         </div>
-        <div class="clbl"><span class="pip g"></span> Mevcut Stok</div>
         <div id="barArea"></div>
         <div class="sep"></div>
-        <div class="clbl"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
+        <div class="clbl" id="el-siparis"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
         <div id="orderArea"></div>
         <button class="btn btn-wa" onclick="shareWA()">💬 WhatsApp ile Paylaş</button>
         <button class="btn btn-green" onclick="openM('m-order')">✅ Siparişi Stoğa Ekle</button>
       </div>
-      <div class="card">
-        <div class="clbl"><span class="pip p"></span> Sipariş Geçmişi</div>
-        <div id="histArea"></div>
-      </div>
     </div>
 
-    <div>
-      <div class="tabs">
+    <div class="main-content">
+      <div class="tabs" id="el-tabs">
         <button class="tbtn active" onclick="switchTab('inventory',this)">📦 Stok</button>
         <button class="tbtn" onclick="switchTab('target',this)">🎯 Hedef</button>
-        <button class="tbtn" onclick="switchTab('alerts',this)">🔔 Uyarılar</button>
       </div>
-      
+      <div id="tab-inventory" class="tab on"><div class="inv-grid" id="invGrid"></div></div>
+      <div id="tab-target" class="tab">
+        <div class="card">
+            <div class="clbl">Hedeflenen Batarya</div>
+            <input type="number" id="targetInput" class="inp" value="100" oninput="calculate()">
+            <div id="targetArea" style="margin-top:20px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 1. VERİ SİSTEMİ
+let state = JSON.parse(localStorage.getItem('bat_tracker_final')) || {
+    levels: [
+        { id: 1, name: 'AE', stock: 40, perBox: 12, perBat: 4, color: 'var(--blue)' },
+        { id: 2, name: 'FE', stock: 69, perBox: 6, perBat: 2, color: 'var(--green)' },
+        { id: 3, name: 'GE', stock: 57, perBox: 6, perBat: 3, color: 'var(--orange)' }
+    ],
+    tourDone: false
+};
+
+// 2. LOJİSTİK MOTORU (Çift Sayı + 52 KAP)
+function calculate() {
+    let rawCaps = state.levels.map(l => (l.stock * l.perBox) / (l.perBat || 1));
+    let minProd = Math.floor(Math.min(...rawCaps));
+    let totalKAP = state.levels.reduce((s, l) => s + l.stock, 0);
+
+    document.getElementById('mProd').innerText = minProd;
+    document.getElementById('mTot').innerText = totalKAP;
+
+    // Verimlilik
+    let avg = rawCaps.reduce((a, b) => a + b, 0) / rawCaps.length;
+    let eff = Math.round((minProd / avg) * 100) || 0;
+    document.getElementById('effNum').innerText = eff;
+    document.getElementById('effArc').style.strokeDashoffset = 176 - (176 * eff) / 100;
+
+    // Barlar
+    let max = Math.max(...rawCaps) || 1;
+    document.getElementById('barArea').innerHTML = state.levels.map((l, i) => `
+        <div class="bar-item">
+            <div class="bar-top"><span class="bar-name">${l.name}</span><span style="font-size:0.7em">${Math.floor(rawCaps[i])} Batarya</span></div>
+            <div class="bar-bg"><div class="bar-fill" style="width:${(rawCaps[i]/max)*100}%; background:${l.color}"></div></div>
+        </div>
+    `).join('');
+
+    // SİPARİŞ PLANI (ÇİFT SAYI GARANTİLİ)
+    const target = 52;
+    let totalW = state.levels.reduce((s, l) => s + (l.perBat/l.perBox), 0);
+    let futureTotal = totalKAP + target;
+    let assigned = 0;
+    
+    document.getElementById('orderArea').innerHTML = state.levels.map((l, i) => {
+        let order;
+        if (i < state.levels.length - 1) {
+            let ideal = (futureTotal * ((l.perBat/l.perBox)/totalW)) - l.stock;
+            order = Math.max(0, Math.round(ideal / 2) * 2);
+            assigned += order;
+        } else {
+            order = target - assigned;
+        }
+        l.lastOrder = order;
+        return `<div class="order-row"><span>${l.name}</span><span class="order-qty">+${order} KAP</span></div>`;
+    }).join('');
+
+    // Hedef Planlama
+    let tVal = document.getElementById('targetInput').value;
+    document.getElementById('targetArea').innerHTML = state.levels.map(l => {
+        let diff = Math.max(0, Math.ceil((tVal * l.perBat - l.stock * l.perBox) / l.perBox));
+        return `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85em;"><span>${l.name} İçin Gereken:</span><b>${diff} KAP</b></div>`;
+    }).join('');
+
+    localStorage.setItem('bat_tracker_final', JSON.stringify(state));
+}
+
+// 3. UI KONTROLLERİ
+function renderInventory() {
+    document.getElementById('invGrid').innerHTML = state.levels.map(l => `
+        <div class="icard ${l.stock < 10 ? 'crit' : ''}">
+            <input type="text" class="iname" value="${l.name}" onchange="updateL(${l.id},'name',this.value)">
+            <div style="font-size:0.7rem;color:var(--cyan);font-weight:800;margin:10px 0;">${l.stock} KAP / ${l.stock * l.perBox} PİL MEVCUT</div>
+            <div class="inp-grid">
+                <div class="inp-wrap"><label class="clbl" style="font-size:0.5em">Stok (KAP)</label><input type="number" class="inp" value="${l.stock}" oninput="updateL(${l.id},'stock',this.value)"></div>
+                <div class="inp-wrap"><label class="clbl" style="font-size:0.5em">Birim İhtiyaç</label><input type="number" class="inp" value="${l.perBat}" oninput="updateL(${l.id},'perBat',this.value)"></div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function updateL(id, f, v) { state.levels.find(x => x.id === id)[f] = f === 'name' ? v.toUpperCase() : parseInt(v) || 0; calculate(); }
+function switchTab(id, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+    document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('on');
+    btn.classList.add('active');
+}
+function openM(id) { document.getElementById(id).classList.add('on'); }
+function closeM(id) { document.getElementById(id).classList.remove('on'); }
+function doOrder() { state.levels.forEach(l => l.stock += l.lastOrder); renderInventory(); calculate(); closeM('m-order'); }
+function doReset() { localStorage.clear(); location.reload(); }
+
+function shareWA() {
+    const d = new Date().toLocaleDateString('tr-TR');
+    let txt = `📦 *SİPARİŞ LİSTESİ* (${d})\n-----------------------\n`;
+    state.levels.forEach(l => txt += `• *${l.name}*: ${l.lastOrder} KAP\n`);
+    txt += `-----------------------\n*TOPLAM SİPARİŞ:* 52 KAP`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
+}
+
+// 4. TUR SİSTEMİ
+let tourStep = 0;
+const tourData = [
+    { el: null, title: "Hoş Geldin Recep! 🔋", desc: "Bu sistem Ford Otosan batarya stoklarını en verimli şekilde yönetmen için hazırlandı." },
+    { el: "el-verim", title: "Verimlilik Analizi", desc: "Buradan stok dengeni ve üretimi tıkayan parçaları görebilirsin." },
+    { el: "el-siparis", title: "Akıllı Sipariş", desc: "Sistem senin için 52 KAP ve çift sayı kuralına uygun siparişi otomatik hesaplar." },
+    { el: "el-tabs", title: "Yönetim", desc: "Stoklarını buradan güncelleyebilir veya hedef planlaması yapabilirsin. Seviye isimlerine tıklayarak değiştirebilirsin." }
+];
+
+function startTour() {
+    if(state.tourDone) return;
+    document.getElementById('tour-overlay').style.display = 'flex';
+    updateTour();
+}
+function nextTour() { tourStep++; if(tourStep >= tourData.length) endTour(); else updateTour(); }
+function updateTour() {
+    let s = tourData[tourStep];
+    document.getElementById('tour-title').innerText = s.title;
+    document.getElementById('tour-desc').innerText = s.desc;
+    if(s.el) {
+        let r = document.getElementById(s.el).getBoundingClientRect();
+        let hl = document.getElementById('tour-hl');
+        hl.style.display = 'block'; hl.style.top = (r.top-5)+'px'; hl.style.left = (r.left-5)+'px';
+        hl.style.width = (r.width+10)+'px'; hl.style.height = (r.height+10)+'px';
+    } else document.getElementById('tour-hl').style.display = 'none';
+}
+function endTour() {
+    document.getElementById('tour-overlay').style.display = 'none';
+    document.getElementById('tour-hl').style.display = 'none';
+    state.tourDone = true; localStorage.setItem('bat_tracker_final', JSON.stringify(state));
+}
+
+// BAŞLAT
+setInterval(() => { document.getElementById('clk')
