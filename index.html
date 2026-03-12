@@ -5,281 +5,288 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Batarya Stok Takip</title>
 <style>
-/* SENİN ÖZEL TASARIMIN */
 *{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --bg:#07090f;--s1:#0d1117;--s2:#111820;
-  --b1:rgba(255,255,255,0.08);--b2:rgba(255,255,255,0.15);
-  --text:#e8f0ff;--t2:rgba(180,200,240,0.65);--t3:rgba(140,165,210,0.38);
-  --blue:#4fa8ff;--blue2:#a8d4ff;--cyan:#00d4c8;
-  --green:#00e090;--green2:#00b872;--red:#ff5060;--orange:#ffaa40;--purple:#b080ff;
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:#07090f;color:#e8f0ff;min-height:100vh;overflow-x:hidden;}
+
+.bg-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.bg-orb1{width:500px;height:500px;top:-120px;left:-120px;background:radial-gradient(circle,rgba(79,168,255,0.16) 0%,transparent 70%);}
+.bg-orb2{width:420px;height:420px;bottom:-100px;right:-100px;background:radial-gradient(circle,rgba(0,212,200,0.14) 0%,transparent 70%);}
+.bg-orb3{width:340px;height:340px;top:40%;left:22%;background:radial-gradient(circle,rgba(0,224,144,0.09) 0%,transparent 70%);}
+
+/* TUR SİSTEMİ */
+.tour-dim{position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;pointer-events:none;transition:opacity 0.3s;}
+.tour-dim.on{pointer-events:all;}
+/* 4 kenar karartma */
+.tour-shade{position:fixed;background:rgba(5,8,18,0.82);z-index:501;transition:all 0.35s ease;pointer-events:all;}
+.tour-shade.hide{opacity:0;pointer-events:none;}
+
+.tour-box{position:fixed;z-index:502;background:#111827;border:1px solid rgba(79,168,255,0.5);border-radius:16px;padding:16px 18px;max-width:280px;width:88vw;box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 2px rgba(79,168,255,0.15);pointer-events:all;transition:top 0.35s ease,left 0.35s ease,right 0.35s ease,bottom 0.35s ease,opacity 0.25s;}
+.tour-box.hide{opacity:0;pointer-events:none;}
+.tour-arrow{position:absolute;width:12px;height:12px;background:#111827;border:1px solid rgba(79,168,255,0.5);transform:rotate(45deg);}
+.tour-step-num{font-size:0.6em;font-weight:700;color:rgba(79,168,255,0.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.tour-title{font-size:0.95em;font-weight:800;margin-bottom:6px;color:#e8f0ff;}
+.tour-desc{font-size:0.78em;color:rgba(180,200,240,0.7);line-height:1.55;margin-bottom:14px;}
+.tour-btns{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.tour-dots{display:flex;gap:4px;}
+.tour-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2);}
+.tour-dot.active{background:#4fa8ff;width:14px;}
+.tour-nav{display:flex;gap:6px;}
+.tour-btn{padding:7px 14px;border-radius:8px;border:0;font-family:inherit;font-size:0.76em;font-weight:700;cursor:pointer;}
+.tour-btn.skip{background:rgba(255,255,255,0.06);color:rgba(180,200,240,0.6);}
+.tour-btn.next{background:linear-gradient(135deg,#1a6ef5,#4fa8ff);color:#fff;}
+.tour-btn.done{background:linear-gradient(135deg,#00b872,#00e090);color:#001a0f;}
+
+/* HIGHLIGHT */
+.tour-highlight{position:fixed;z-index:500;border-radius:12px;box-shadow:0 0 0 3px #4fa8ff,0 0 0 6px rgba(79,168,255,0.2);pointer-events:none;transition:all 0.35s ease;animation:pulse-ring 1.5s ease-in-out infinite;}
+.tour-highlight.hide{opacity:0;}
+@keyframes pulse-ring{0%,100%{box-shadow:0 0 0 3px #4fa8ff,0 0 0 6px rgba(79,168,255,0.2);}50%{box-shadow:0 0 0 3px #4fa8ff,0 0 0 10px rgba(79,168,255,0.05);}}
+
+/* APP */
+.app{position:relative;z-index:1;max-width:1560px;margin:0 auto;padding:0 14px 80px;}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;padding:18px 0 20px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1a6ef5,#00d4c8);display:flex;align-items:center;justify-content:center;font-size:1.1em;}
+.logo-text{font-size:1.05em;font-weight:800;color:#a8d4ff;}
+.hright{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.hclock{font-size:0.72em;font-weight:700;letter-spacing:1px;color:rgba(180,200,240,0.65);background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:7px 11px;}
+.hbtn{background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:rgba(180,200,240,0.65);padding:7px 11px;font-size:0.72em;font-weight:600;cursor:pointer;font-family:inherit;}
+.hbtn.red{color:#ff5060;}
+
+/* CARD */
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px;margin-bottom:14px;}
+.clbl{font-size:0.63em;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(140,165,210,0.38);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.pip{width:5px;height:5px;border-radius:50%;background:#4fa8ff;display:inline-block;flex-shrink:0;}
+.pip.g{background:#00e090;}.pip.r{background:#ff5060;}.pip.p{background:#b080ff;}
+
+/* LAYOUT */
+.layout{display:block;}
+@media(min-width:1000px){
+  .layout{display:flex;gap:20px;align-items:flex-start;}
+  .sidebar{width:390px;flex-shrink:0;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto;}
+  .main-col{flex:1;}
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-/* ARKA PLAN ANİMASYONU */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 55% 45% at 15% 20%,rgba(79,168,255,0.13) 0%,transparent 70%),
-    radial-gradient(ellipse 45% 40% at 85% 75%,rgba(0,212,200,0.11) 0%,transparent 70%),
-    radial-gradient(ellipse 40% 35% at 50% 55%,rgba(0,224,144,0.08) 0%,transparent 70%),
-    radial-gradient(ellipse 35% 30% at 78% 18%,rgba(176,128,255,0.09) 0%,transparent 70%);
-  animation:bg-shift 20s ease-in-out infinite alternate;
-}
-@keyframes bg-shift{ 0%{background-position:0% 0%,100% 100%,50% 50%,80% 20%;} 100%{background-position:10% 5%,90% 95%,55% 45%,75% 25%;} }
+/* VERİMLİLİK */
+.eff-block{display:flex;align-items:center;gap:13px;padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:13px;}
+.eff-circle{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;flex-shrink:0;}
+.eff-circle svg{position:absolute;top:0;left:0;width:100%;height:100%;}
+.eff-num{position:relative;z-index:1;font-size:0.95em;font-weight:900;line-height:1;}
+.eff-pct{position:relative;z-index:1;font-size:0.4em;color:rgba(180,200,240,0.65);}
+.etitle{font-size:0.88em;font-weight:700;margin-bottom:3px;}
+.esub{font-size:0.68em;color:rgba(180,200,240,0.65);}
 
-.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.orb{position:absolute;border-radius:50%;}
-.orb1{width:600px;height:600px;top:-15%;left:-10%; background:radial-gradient(circle,rgba(79,168,255,0.15) 0%,transparent 65%); animation:float1 18s ease-in-out infinite;}
-.orb2{width:500px;height:500px;top:40%;right:-8%; background:radial-gradient(circle,rgba(0,212,200,0.13) 0%,transparent 65%); animation:float2 22s ease-in-out infinite;}
-@keyframes float1{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,-30px);}}
-@keyframes float2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,25px);}}
+/* METRİKLER */
+.metrics{display:flex;gap:6px;margin-bottom:13px;}
+.met{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 6px;text-align:center;position:relative;overflow:hidden;}
+.met-top{position:absolute;top:0;left:0;right:0;height:2px;}
+.met-top.bl{background:linear-gradient(90deg,#4fa8ff,#00d4c8);}
+.met-top.gr{background:linear-gradient(90deg,#00b872,#00e090);}
+.met-top.rd{background:linear-gradient(90deg,#ff5060,#ffaa40);}
+.met-val{font-size:1.65em;font-weight:900;line-height:1;margin-top:2px;}
+.met-val.bl{color:#a8d4ff;}.met-val.gr{color:#00e090;}.met-val.rd{color:#ff5060;}
+.met-lbl{font-size:0.54em;font-weight:700;color:rgba(140,165,210,0.38);text-transform:uppercase;margin-top:3px;}
 
-.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.02; background-image:linear-gradient(rgba(100,160,255,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(100,160,255,0.8) 1px,transparent 1px); background-size:55px 55px;}
+/* BARLAR */
+.bar-item{margin-bottom:9px;}
+.bar-top{display:flex;justify-content:space-between;margin-bottom:4px;}
+.bar-name{font-size:0.78em;font-weight:700;display:flex;align-items:center;gap:6px;}
+.bdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.bar-right{font-size:0.66em;color:rgba(180,200,240,0.65);}
+.bar-bg{height:6px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;}
 
-.app{position:relative;z-index:1;max-width:1560px;margin:0 auto;padding:0 32px 80px;}
+.sep{height:1px;background:rgba(255,255,255,0.08);margin:12px 0;}
+.order-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:9px;margin-bottom:5px;}
+.order-name{font-size:0.82em;font-weight:700;display:flex;align-items:center;gap:6px;}
+.order-r{display:flex;align-items:center;gap:5px;}
+.order-sim{font-size:0.63em;color:rgba(140,165,210,0.38);}
+.order-qty{font-size:0.76em;font-weight:800;background:rgba(0,224,144,0.1);color:#00e090;border:1px solid rgba(0,224,144,0.2);padding:2px 8px;border-radius:6px;}
+.order-total{margin-top:8px;padding:9px 12px;background:rgba(0,224,144,0.07);border:1px solid rgba(0,224,144,0.15);border-radius:9px;display:flex;justify-content:space-between;align-items:center;}
+.otl{font-size:0.68em;color:rgba(180,200,240,0.65);}
+.otv{font-size:0.98em;font-weight:900;color:#00e090;}
 
-.header{display:flex;align-items:center;justify-content:space-between;padding:26px 0 28px;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--b1);margin-bottom:28px;}
-.logo-text{font-size:1.15em;font-weight:800;background:linear-gradient(135deg,var(--blue2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hclock{font-size:0.78em;font-weight:700;letter-spacing:1.5px;color:var(--t2);background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:9px 16px;}
-
-.card{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
-.clbl{font-size:0.67em;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
-.pip{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;}
-
-.grid{display:grid;grid-template-columns:400px 1fr;gap:22px;align-items:start;}
-@media(max-width:1100px){.grid{grid-template-columns:1fr;}}
-
-.eff-block{display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--b1);margin-bottom:16px;}
-.eff-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;}
-.eff-circle svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);}
-.eff-num{font-size:1.05em;font-weight:900;}
-
-.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
-.met{background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:13px 8px;text-align:center;}
-.met-val{font-size:1.8em;font-weight:900;line-height:1;}
-.met-lbl{font-size:0.58em;font-weight:700;color:var(--t3);text-transform:uppercase;margin-top:4px;}
-
-.bar-item{margin-bottom:11px;}
-.bar-top{display:flex;justify-content:space-between;margin-bottom:5px;}
-.bar-bg{height:7px;border-radius:4px;background:rgba(255,255,255,0.06);overflow:hidden;}
-.bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
-
-.order-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:11px;margin-bottom:6px;}
-.order-qty{font-size:0.8em;font-weight:800;color:var(--green);border:1px solid rgba(0,224,144,0.2);padding:3px 10px;border-radius:7px;}
-
-.btn{width:100%;padding:13px;border-radius:13px;border:none;font-weight:700;cursor:pointer;margin-top:8px;}
-.btn-green{background:linear-gradient(135deg,var(--green2),var(--green));color:#001a0f;}
+.btn{width:100%;padding:13px;border-radius:11px;border:0;font-family:inherit;font-size:0.84em;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:8px;}
+.btn-green{background:linear-gradient(135deg,#00b872,#00e090);color:#001a0f;}
 .btn-wa{background:linear-gradient(135deg,#128c3b,#25D366);color:#fff;}
 
-.tabs{display:flex;gap:3px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);border-radius:14px;padding:4px;margin-bottom:18px;}
-.tbtn{flex:1;padding:10px;border-radius:10px;border:none;font-weight:700;cursor:pointer;color:var(--t3);background:transparent;}
-.tbtn.active{background:rgba(255,255,255,0.07);color:var(--text);border:1px solid var(--b1);}
+/* OVERLAY / MODAL */
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:600;background:rgba(5,8,18,0.9);display:flex;align-items:center;justify-content:center;padding:16px;}
+.overlay.hide{display:none;}
+.modal{background:#111827;border:1px solid rgba(255,255,255,0.15);border-radius:18px;padding:22px;width:100%;max-width:400px;max-height:88vh;overflow-y:auto;}
+.modal h2{font-size:1.05em;font-weight:800;margin-bottom:8px;}
+.modal p{font-size:0.82em;color:rgba(180,200,240,0.65);margin-bottom:15px;line-height:1.55;}
+.mbtns{display:flex;gap:8px;margin-top:4px;}
+.mbtn{flex:1;padding:11px;border-radius:9px;border:0;font-family:inherit;font-size:0.83em;font-weight:700;cursor:pointer;}
+.mbtn-c{background:rgba(255,255,255,0.06);color:rgba(180,200,240,0.65);border:1px solid rgba(255,255,255,0.08);}
+.mbtn-ok{background:linear-gradient(135deg,#00b872,#00e090);color:#001a0f;}
+.mbtn-red{background:linear-gradient(135deg,#b91c1c,#ff5060);color:#fff;}
+.exp-area{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px;font-size:0.68em;color:rgba(180,200,240,0.65);white-space:pre-wrap;max-height:150px;overflow-y:auto;margin-bottom:12px;font-family:monospace;line-height:1.6;}
+.imp-ta{width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:9px;color:#e8f0ff;font-size:0.74em;min-height:75px;outline:0;resize:vertical;margin-bottom:10px;font-family:monospace;}
+
+/* TABS */
+.tabs{display:flex;gap:3px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:4px;margin-bottom:14px;}
+.tbtn{flex:1;padding:9px 6px;border-radius:8px;border:0;font-family:inherit;font-size:0.75em;font-weight:700;cursor:pointer;color:rgba(140,165,210,0.38);background:transparent;}
+.tbtn.active{background:rgba(255,255,255,0.07);color:#e8f0ff;border:1px solid rgba(255,255,255,0.08);}
 .tab{display:none;}.tab.on{display:block;}
 
-.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
-.icard{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:22px;padding:22px;}
-.iname{font-size:1.5em;font-weight:900;background:transparent;border:none;color:var(--text);width:100%;border-bottom:2px solid transparent;margin-bottom:10px;}
-.inp{background:rgba(255,255,255,0.05);border:1px solid var(--b1);border-radius:10px;padding:10px;color:var(--text);font-weight:700;width:100%;outline:none;}
+/* STOK KARTLARI */
+.inv-grid{display:flex;flex-wrap:wrap;gap:12px;}
+.icard{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px;width:100%;}
+@media(min-width:640px){.icard{width:calc(50% - 6px);}}
+@media(min-width:1200px){.icard{width:calc(33.333% - 8px);}}
+.icard.crit{border-color:rgba(255,80,96,0.4);background:rgba(255,80,96,0.06);}
+.icard.neck{border-color:rgba(255,170,64,0.35);background:rgba(255,170,64,0.05);}
+.icard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px;}
+.iname{font-size:1.35em;font-weight:900;background:transparent;border:0;color:#e8f0ff;outline:0;width:85px;border-bottom:2px solid transparent;font-family:inherit;padding:2px 0;}
+.iname:focus{border-bottom-color:#4fa8ff;}
+.isub{font-size:0.68em;color:rgba(180,200,240,0.65);margin-top:3px;}
+.badges{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+.badge{font-size:0.58em;font-weight:800;padding:3px 7px;border-radius:20px;}
+.b-cap{background:rgba(79,168,255,0.1);color:#a8d4ff;border:1px solid rgba(79,168,255,0.2);}
+.b-crit{background:rgba(255,80,96,0.1);color:#ff5060;border:1px solid rgba(255,80,96,0.2);}
+.b-neck{background:rgba(255,170,64,0.1);color:#ffaa40;border:1px solid rgba(255,170,64,0.2);}
+.inp-grid{display:flex;flex-wrap:wrap;gap:7px;}
+.inp-wrap{width:calc(50% - 4px);display:flex;flex-direction:column;gap:3px;}
+.inp-lbl{font-size:0.58em;font-weight:700;color:rgba(140,165,210,0.38);text-transform:uppercase;letter-spacing:0.6px;}
+.inp{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:9px;color:#e8f0ff;font-size:0.86em;font-weight:700;width:100%;outline:0;font-family:inherit;}
+.inp:focus{border-color:#4fa8ff;}
+.ifoot{display:flex;gap:6px;margin-top:10px;}
+.sm-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(180,200,240,0.65);padding:7px 10px;border-radius:7px;cursor:pointer;font-size:0.71em;font-weight:700;font-family:inherit;}
+.sm-btn.del{color:#ff5060;}
+.add-card{background:transparent;border:2px dashed rgba(255,255,255,0.15);border-radius:18px;padding:24px;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;color:rgba(140,165,210,0.38);margin-top:12px;}
 
-/* TUR SİSTEMİ CSS */
-.tour-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;}
-.tour-box{background:#111827;border:2px solid var(--blue);border-radius:20px;padding:25px;width:320px;box-shadow:0 10px 40px rgba(0,0,0,0.8);}
-.tour-hl{position:fixed;z-index:1999;border-radius:15px;box-shadow:0 0 0 1000px rgba(0,0,0,0.8),0 0 0 4px var(--blue);pointer-events:none;}
+.trow{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:9px;margin-bottom:5px;}
+.trow-n{font-size:0.81em;font-weight:600;}
+.trow-v{font-size:0.81em;font-weight:800;color:#ffaa40;}
+.trow-v.ok{color:#00e090;}
+.target-wrap{position:relative;margin-bottom:13px;}
+.target-wrap input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 38px 12px 13px;color:#e8f0ff;font-size:0.98em;font-weight:800;outline:0;font-family:inherit;}
+.target-ico{position:absolute;right:12px;top:50%;transform:translateY(-50%);}
+.hist{padding:9px 11px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:9px;margin-bottom:5px;}
+.hist-date{font-size:0.64em;color:rgba(140,165,210,0.38);margin-bottom:4px;}
+.hist-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.hist-tag{font-size:0.66em;font-weight:700;padding:2px 7px;background:rgba(79,168,255,0.08);color:#a8d4ff;border:1px solid rgba(79,168,255,0.15);border-radius:5px;}
+.empty{font-size:0.78em;color:rgba(140,165,210,0.38);text-align:center;padding:16px;}
 
-.overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,8,18,0.9);display:none;align-items:center;justify-content:center;}
-.overlay.on{display:flex;}
-.modal{background:#111827;border:1px solid var(--b2);border-radius:22px;padding:30px;width:90%;max-width:400px;text-align:center;}
+.toast{position:fixed;top:16px;right:14px;z-index:700;background:#111827;border:1px solid rgba(255,255,255,0.15);border-radius:11px;padding:11px 15px;font-size:0.78em;font-weight:700;box-shadow:0 12px 28px rgba(0,0,0,0.5);display:flex;align-items:center;gap:7px;max-width:260px;transform:translateX(110%);transition:transform 0.3s;}
+.toast.on{transform:translateX(0);}
+.toast.s{border-left:3px solid #00e090;}.toast.i{border-left:3px solid #4fa8ff;}.toast.w{border-left:3px solid #ffaa40;}
 </style>
 </head>
 <body>
 
-<div class="orbs">
-  <div class="orb orb1"></div><div class="orb orb2"></div>
-</div>
-<div class="mesh"></div>
+<div class="bg-orb bg-orb1"></div>
+<div class="bg-orb bg-orb2"></div>
+<div class="bg-orb bg-orb3"></div>
+<div class="toast" id="toast"></div>
 
-<div id="tour-overlay" class="tour-overlay">
-  <div class="tour-box">
-    <h3 id="tour-title" style="margin-bottom:10px;color:var(--blue);">Hoş Geldin Recep!</h3>
-    <p id="tour-desc" style="font-size:0.85em;color:var(--t2);line-height:1.5;margin-bottom:20px;"></p>
-    <div style="display:flex;justify-content:space-between;">
-      <button onclick="endTour()" style="background:transparent;border:0;color:var(--t3);cursor:pointer;">Atla</button>
-      <button onclick="nextTour()" style="background:var(--blue);border:0;padding:8px 16px;border-radius:8px;color:white;font-weight:bold;cursor:pointer;">İleri →</button>
+<!-- TUR -->
+<div id="tour-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;background:rgba(5,8,18,0.7);"></div>
+<div id="tour-box" style="display:none;position:fixed;z-index:501;bottom:24px;left:50%;transform:translateX(-50%);width:92vw;max-width:420px;background:#111827;border:2px solid #4fa8ff;border-radius:18px;padding:20px 20px 16px;box-shadow:0 8px 40px rgba(0,0,0,0.7);">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <div id="tour-step-num" style="font-size:0.62em;font-weight:700;color:rgba(79,168,255,0.8);letter-spacing:1px;text-transform:uppercase;"></div>
+    <div id="tour-dots" style="display:flex;gap:5px;"></div>
+  </div>
+  <div id="tour-title" style="font-size:1em;font-weight:800;color:#e8f0ff;margin-bottom:7px;"></div>
+  <div id="tour-desc" style="font-size:0.8em;color:rgba(180,200,240,0.75);line-height:1.6;margin-bottom:16px;"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <button id="tour-skip" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:rgba(180,200,240,0.5);padding:8px 16px;font-size:0.76em;font-weight:600;cursor:pointer;font-family:inherit;">Atla</button>
+    <button id="tour-next" style="background:linear-gradient(135deg,#1a6ef5,#4fa8ff);border:0;border-radius:8px;color:#fff;padding:9px 20px;font-size:0.82em;font-weight:700;cursor:pointer;font-family:inherit;">İleri →</button>
+  </div>
+</div>
+<div id="tour-hl" style="display:none;position:fixed;z-index:499;border-radius:14px;box-shadow:0 0 0 4px #4fa8ff,0 0 0 8px rgba(79,168,255,0.25),0 0 30px rgba(79,168,255,0.3);pointer-events:none;"></div>
+
+<!-- MODALLER -->
+<div class="overlay hide" id="m-order">
+  <div class="modal">
+    <h2>✅ Siparişi Onayla</h2>
+    <p>Hesaplanan miktarlar stoğa eklenecek ve geçmişe kaydedilecek.</p>
+    <div class="mbtns">
+      <button class="mbtn mbtn-c" id="order-cancel">Vazgeç</button>
+      <button class="mbtn mbtn-ok" id="order-ok">Ekle</button>
     </div>
   </div>
 </div>
-<div id="tour-hl" class="tour-hl" style="display:none;"></div>
-
-<div class="overlay" id="m-order">
-  <div class="modal"><h2>Siparişi Onayla</h2><p style="margin:20px 0;color:var(--t2);">52 KAP sipariş stoğa eklenecek.</p>
-  <div style="display:flex;gap:10px;"><button class="btn" style="background:#333;color:white" onclick="closeM('m-order')">Vazgeç</button><button class="btn btn-green" onclick="doOrder()">Onayla</button></div></div>
+<div class="overlay hide" id="m-reset">
+  <div class="modal">
+    <h2>⚠️ Sıfırla</h2>
+    <p>Tüm stok verileri ve sipariş geçmişi silinecek. Geri alınamaz!</p>
+    <div class="mbtns">
+      <button class="mbtn mbtn-c" id="reset-cancel">Vazgeç</button>
+      <button class="mbtn mbtn-red" id="reset-ok">Sıfırla</button>
+    </div>
+  </div>
+</div>
+<div class="overlay hide" id="m-exp">
+  <div class="modal">
+    <h2>📤 Dışa Aktar</h2>
+    <p>Bu veriyi kopyalayıp başka cihazda yükleyebilirsiniz.</p>
+    <div class="exp-area" id="expArea"></div>
+    <div class="mbtns">
+      <button class="mbtn mbtn-c" id="exp-close">Kapat</button>
+      <button class="mbtn mbtn-ok" id="exp-copy">Kopyala</button>
+    </div>
+  </div>
+</div>
+<div class="overlay hide" id="m-imp">
+  <div class="modal">
+    <h2>📥 İçe Aktar</h2>
+    <p>Dışa aktarılan JSON verisini yapıştırın.</p>
+    <textarea class="imp-ta" id="impArea" placeholder='{"levels":[]}'></textarea>
+    <div class="mbtns">
+      <button class="mbtn mbtn-c" id="imp-cancel">Vazgeç</button>
+      <button class="mbtn mbtn-ok" id="imp-ok">Yükle</button>
+    </div>
+  </div>
 </div>
 
+<!-- ANA EKRAN -->
 <div class="app">
-  <div class="header">
-    <div class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Batarya Stok Takip</span></div>
-    <div class="header-right">
-      <div class="hclock" id="clk">00:00:00</div>
-      <button class="hbtn red" onclick="localStorage.clear(); location.reload();">🗑 Sıfırla</button>
+  <div class="header" id="el-header">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <span class="logo-text">Batarya Stok Takip</span>
+    </div>
+    <div class="hright">
+      <div class="hclock" id="clk">--:--:--</div>
+      <button class="hbtn" id="btn-exp">📤 Aktar</button>
+      <button class="hbtn" id="btn-imp">📥 İçe Al</button>
+      <button class="hbtn red" id="btn-reset">🗑 Sıfırla</button>
     </div>
   </div>
 
-  <div class="grid">
-    <div class="sidebar">
-      <div class="card" id="el-verim">
+  <div class="layout">
+    <div class="sidebar" id="el-sidebar">
+      <div class="card" id="el-verimlilik">
         <div class="clbl"><span class="pip"></span> Stok Verimliliği</div>
         <div class="eff-block">
           <div class="eff-circle">
-            <svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/><circle id="effArc" cx="36" cy="36" r="28" fill="none" stroke="#4fa8ff" stroke-width="6" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176" style="transition:0.8s;"/></svg>
+            <svg viewBox="0 0 66 66" style="position:absolute;top:0;left:0;width:100%;height:100%;transform:rotate(-90deg);">
+              <circle cx="33" cy="33" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+              <circle id="effArc" cx="33" cy="33" r="26" fill="none" stroke="#4fa8ff" stroke-width="6"
+                stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="163" style="transition:stroke-dashoffset 0.8s,stroke 0.4s;"/>
+            </svg>
             <div class="eff-num" id="effNum">0</div>
+            <div class="eff-pct">%</div>
           </div>
-          <div class="eff-info"><div class="title" id="effTitle">Analiz...</div></div>
+          <div>
+            <div class="etitle" id="effTitle">Hesaplanıyor</div>
+            <div class="esub" id="effSub">—</div>
+          </div>
         </div>
         <div class="metrics">
-          <div class="met"><div class="met-val" id="mProd" style="color:var(--green)">0</div><div class="met-lbl">Üretilebilir</div></div>
-          <div class="met"><div class="met-val" id="mTot" style="color:var(--blue)">0</div><div class="met-lbl">Toplam KAP</div></div>
+          <div class="met"><div class="met-top gr"></div><div class="met-val gr" id="mProd">0</div><div class="met-lbl">🔋 Üretilebilir</div></div>
+          <div class="met"><div class="met-top bl"></div><div class="met-val bl" id="mTot">0</div><div class="met-lbl">📦 Toplam KAP</div></div>
+          <div class="met"><div class="met-top rd"></div><div class="met-val rd" id="mCrit">0</div><div class="met-lbl">⚠ Kritik</div></div>
         </div>
+        <div class="clbl"><span class="pip g"></span> Mevcut Stok</div>
         <div id="barArea"></div>
-        <div style="height:1px;background:var(--b1);margin:14px 0;"></div>
-        <div class="clbl" id="el-siparis"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
+      </div>
+      <div class="card" id="el-siparis">
+        <div class="clbl"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
         <div id="orderArea"></div>
-        <button class="btn btn-wa" onclick="shareWA()">💬 WhatsApp ile Paylaş</button>
-        <button class="btn btn-green" onclick="openM('m-order')">✅ Siparişi Stoğa Ekle</button>
-      </div>
-    </div>
-
-    <div class="main-content">
-      <div class="tabs" id="el-tabs">
-        <button class="tbtn active" onclick="switchTab('inventory',this)">📦 Stok</button>
-        <button class="tbtn" onclick="switchTab('target',this)">🎯 Hedef</button>
-      </div>
-      <div id="tab-inventory" class="tab on"><div class="inv-grid" id="invGrid"></div></div>
-      <div id="tab-target" class="tab">
-        <div class="card">
-          <div class="clbl">Hedeflenen Batarya</div>
-          <input type="number" id="targetInput" class="inp" value="100" oninput="calculate()">
-          <div id="targetArea" style="margin-top:20px;"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-let state = JSON.parse(localStorage.getItem('bat_v82_final')) || {
-    levels: [
-        { id: 1, name: 'AE', stock: 40, perBox: 12, perBat: 4, color: 'var(--blue)' },
-        { id: 2, name: 'FE', stock: 69, perBox: 6, perBat: 2, color: 'var(--green)' },
-        { id: 3, name: 'GE', stock: 57, perBox: 6, perBat: 3, color: 'var(--orange)' }
-    ],
-    tourDone: false
-};
-
-function calculate() {
-    let rawCaps = state.levels.map(l => (l.stock * l.perBox) / (l.perBat || 1));
-    let minProd = Math.floor(Math.min(...rawCaps));
-    let totalKAP = state.levels.reduce((s, l) => s + l.stock, 0);
-
-    document.getElementById('mProd').innerText = minProd;
-    document.getElementById('mTot').innerText = totalKAP;
-
-    let avg = rawCaps.reduce((a, b) => a + b, 0) / rawCaps.length;
-    let eff = Math.round((minProd / avg) * 100) || 0;
-    document.getElementById('effNum').innerText = eff + "%";
-    document.getElementById('effArc').style.strokeDashoffset = 176 - (176 * eff) / 100;
-    document.getElementById('effTitle').innerText = eff > 80 ? "Dengeli" : "Dengesiz";
-
-    let max = Math.max(...rawCaps) || 1;
-    document.getElementById('barArea').innerHTML = state.levels.map((l, i) => `
-        <div class="bar-item">
-            <div class="bar-top"><span>${l.name}</span><span style="font-size:0.75em;">${Math.floor(rawCaps[i])} Batarya</span></div>
-            <div class="bar-bg"><div class="bar-fill" style="width:${(rawCaps[i]/max)*100}%; background:${l.color}"></div></div>
-        </div>
-    `).join('');
-
-    const target = 52;
-    let totalW = state.levels.reduce((s, l) => s + (l.perBat/l.perBox), 0);
-    let futureTotal = totalKAP + target;
-    let assigned = 0;
-    
-    document.getElementById('orderArea').innerHTML = state.levels.map((l, i) => {
-        let order = (i < state.levels.length - 1) ? Math.max(0, Math.round(((futureTotal * ((l.perBat/l.perBox)/totalW)) - l.stock) / 2) * 2) : (target - assigned);
-        assigned += order; l.lastOrder = order;
-        return `<div class="order-row"><span>${l.name}</span><span class="order-qty">+${order} KAP</span></div>`;
-    }).join('');
-
-    let tVal = document.getElementById('targetInput').value;
-    document.getElementById('targetArea').innerHTML = state.levels.map(l => {
-        let diff = Math.max(0, Math.ceil((tVal * l.perBat - l.stock * l.perBox) / l.perBox));
-        return `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85em;"><span>${l.name} İçin Gereken:</span><b>${diff} KAP</b></div>`;
-    }).join('');
-
-    localStorage.setItem('bat_v82_final', JSON.stringify(state));
-}
-
-function renderInventory() {
-    document.getElementById('invGrid').innerHTML = state.levels.map(l => `
-        <div class="icard">
-            <input type="text" class="iname" value="${l.name}" onchange="updateL(${l.id},'name',this.value)">
-            <div style="font-size:0.75rem;color:var(--cyan);font-weight:800;margin-bottom:15px;">${l.stock} KAP / ${l.stock * l.perBox} PİL</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                <div><label style="font-size:0.6em;color:var(--t3);">STOK (KAP)</label><input type="number" class="inp" value="${l.stock}" oninput="updateL(${l.id},'stock',this.value)"></div>
-                <div><label style="font-size:0.6em;color:var(--t3);">İHTİYAÇ</label><input type="number" class="inp" value="${l.perBat}" oninput="updateL(${l.id},'perBat',this.value)"></div>
-            </div>
-        </div>
-    `).join('');
-}
-
-function updateL(id, f, v) { state.levels.find(x => x.id === id)[f] = f === 'name' ? v.toUpperCase() : (parseInt(v) || 0); calculate(); }
-function switchTab(id, btn) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
-    document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-'+id).classList.add('on');
-    btn.classList.add('active');
-}
-function openM(id) { document.getElementById(id).classList.add('on'); }
-function closeM(id) { document.getElementById(id).classList.remove('on'); }
-function doOrder() { state.levels.forEach(l => l.stock += l.lastOrder); renderInventory(); calculate(); closeM('m-order'); }
-
-function shareWA() {
-    const d = new Date().toLocaleDateString('tr-TR');
-    let txt = `📦 *SİPARİŞ LİSTESİ* (${d})\n-----------------------\n`;
-    state.levels.forEach(l => txt += `• *${l.name}*: ${l.lastOrder} KAP\n`);
-    txt += `-----------------------\n*TOPLAM SİPARİŞ:* 52 KAP`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
-}
-
-let tourStep = 0;
-const tourData = [
-    { el: null, title: "Lojistik Dashboard 🔋", desc: "Seni bekleten hatayı çözdük Recep! Şimdi sistem Ford Otosan standartlarında çalışıyor." },
-    { el: "el-verim", title: "Denge Analizi", desc: "Halkadan genel durumu, barlardan hangi parçanın eksik olduğunu görebilirsin." },
-    { el: "el-siparis", title: "Çift Sayı Kuralı", desc: "Sistem her zaman 52 KAP ve çift sayı planı yapar." }
-];
-
-function startTour() { if(!state.tourDone) { document.getElementById('tour-overlay').style.display = 'flex'; updateTour(); } }
-function nextTour() { tourStep++; if(tourStep >= tourData.length) endTour(); else updateTour(); }
-function updateTour() {
-    let s = tourData[tourStep];
-    document.getElementById('tour-title').innerText = s.title;
-    document.getElementById('tour-desc').innerText = s.desc;
-    if(s.el) {
-        let r = document.getElementById(s.el).getBoundingClientRect();
-        let hl = document.getElementById('tour-hl');
-        hl.style.display = 'block'; hl.style.top = (r.top-5)+'px'; hl.style.left = (r.left-5)+'px';
-        hl.style.width = (r.width+10)+'px'; hl.style.height = (r.height+10)+'px';
-    } else document.getElementById('tour-hl').style.display = 'none';
-}
-function endTour() {
-    document.getElementById('tour-overlay').style.display = 'none';
-    document.getElementById('tour-hl').style.display = 'none';
-    state.tourDone = true; localStorage.setItem('bat_v82_final', JSON.stringify(state));
-}
-
-setInterval(() => { document.getElementById('clk').innerText = new Date().toLocaleTimeString('tr-TR'); }, 1000);
-renderInventory();
-calculate();
-setTimeout(startTour, 1000);
-</script>
-</body>
-</html>
+        <button class="btn btn-wa" id="btn-wa">💬 WhatsApp ile Paylaş</button>
+        <button class="btn btn-green" id="btn-order">✅ Siparişi Stoğa Ekle</button>
+      </di
