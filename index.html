@@ -6,69 +6,26 @@
 <title>Batarya Stok Takip</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:#07090f;color:#e8f0ff;min-height:100vh;overflow-x:hidden;}
-
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#07090f;color:#e8f0ff;min-height:100vh;overflow-x:hidden;}
 .bg-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
 .bg-orb1{width:500px;height:500px;top:-120px;left:-120px;background:radial-gradient(circle,rgba(79,168,255,0.16) 0%,transparent 70%);}
 .bg-orb2{width:420px;height:420px;bottom:-100px;right:-100px;background:radial-gradient(circle,rgba(0,212,200,0.14) 0%,transparent 70%);}
 .bg-orb3{width:340px;height:340px;top:40%;left:22%;background:radial-gradient(circle,rgba(0,224,144,0.09) 0%,transparent 70%);}
-
-/* TUR SİSTEMİ */
-.tour-dim{position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;pointer-events:none;transition:opacity 0.3s;}
-.tour-dim.on{pointer-events:all;}
-/* 4 kenar karartma */
-.tour-shade{position:fixed;background:rgba(5,8,18,0.82);z-index:501;transition:all 0.35s ease;pointer-events:all;}
-.tour-shade.hide{opacity:0;pointer-events:none;}
-
-.tour-box{position:fixed;z-index:502;background:#111827;border:1px solid rgba(79,168,255,0.5);border-radius:16px;padding:16px 18px;max-width:280px;width:88vw;box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 2px rgba(79,168,255,0.15);pointer-events:all;transition:top 0.35s ease,left 0.35s ease,right 0.35s ease,bottom 0.35s ease,opacity 0.25s;}
-.tour-box.hide{opacity:0;pointer-events:none;}
-.tour-arrow{position:absolute;width:12px;height:12px;background:#111827;border:1px solid rgba(79,168,255,0.5);transform:rotate(45deg);}
-.tour-step-num{font-size:0.6em;font-weight:700;color:rgba(79,168,255,0.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
-.tour-title{font-size:0.95em;font-weight:800;margin-bottom:6px;color:#e8f0ff;}
-.tour-desc{font-size:0.78em;color:rgba(180,200,240,0.7);line-height:1.55;margin-bottom:14px;}
-.tour-btns{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.tour-dots{display:flex;gap:4px;}
-.tour-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2);}
-.tour-dot.active{background:#4fa8ff;width:14px;}
-.tour-nav{display:flex;gap:6px;}
-.tour-btn{padding:7px 14px;border-radius:8px;border:0;font-family:inherit;font-size:0.76em;font-weight:700;cursor:pointer;}
-.tour-btn.skip{background:rgba(255,255,255,0.06);color:rgba(180,200,240,0.6);}
-.tour-btn.next{background:linear-gradient(135deg,#1a6ef5,#4fa8ff);color:#fff;}
-.tour-btn.done{background:linear-gradient(135deg,#00b872,#00e090);color:#001a0f;}
-
-/* HIGHLIGHT */
-.tour-highlight{position:fixed;z-index:500;border-radius:12px;box-shadow:0 0 0 3px #4fa8ff,0 0 0 6px rgba(79,168,255,0.2);pointer-events:none;transition:all 0.35s ease;animation:pulse-ring 1.5s ease-in-out infinite;}
-.tour-highlight.hide{opacity:0;}
-@keyframes pulse-ring{0%,100%{box-shadow:0 0 0 3px #4fa8ff,0 0 0 6px rgba(79,168,255,0.2);}50%{box-shadow:0 0 0 3px #4fa8ff,0 0 0 10px rgba(79,168,255,0.05);}}
-
-/* APP */
 .app{position:relative;z-index:1;max-width:1560px;margin:0 auto;padding:0 14px 80px;}
-
-/* HEADER */
 .header{display:flex;align-items:center;justify-content:space-between;padding:18px 0 20px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:20px;flex-wrap:wrap;gap:10px;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1a6ef5,#00d4c8);display:flex;align-items:center;justify-content:center;font-size:1.1em;}
 .logo-text{font-size:1.05em;font-weight:800;color:#a8d4ff;}
 .hright{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.hclock{font-size:0.72em;font-weight:700;letter-spacing:1px;color:rgba(180,200,240,0.65);background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:7px 11px;}
+.hclock{font-size:0.72em;font-weight:700;color:rgba(180,200,240,0.65);background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:7px 11px;}
 .hbtn{background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:rgba(180,200,240,0.65);padding:7px 11px;font-size:0.72em;font-weight:600;cursor:pointer;font-family:inherit;}
 .hbtn.red{color:#ff5060;}
-
-/* CARD */
 .card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px;margin-bottom:14px;}
 .clbl{font-size:0.63em;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(140,165,210,0.38);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
 .pip{width:5px;height:5px;border-radius:50%;background:#4fa8ff;display:inline-block;flex-shrink:0;}
 .pip.g{background:#00e090;}.pip.r{background:#ff5060;}.pip.p{background:#b080ff;}
-
-/* LAYOUT */
 .layout{display:block;}
-@media(min-width:1000px){
-  .layout{display:flex;gap:20px;align-items:flex-start;}
-  .sidebar{width:390px;flex-shrink:0;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto;}
-  .main-col{flex:1;}
-}
-
-/* VERİMLİLİK */
+@media(min-width:1000px){.layout{display:flex;gap:20px;align-items:flex-start;}.sidebar{width:390px;flex-shrink:0;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto;}.main-col{flex:1;}}
 .eff-block{display:flex;align-items:center;gap:13px;padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:13px;}
 .eff-circle{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;flex-shrink:0;}
 .eff-circle svg{position:absolute;top:0;left:0;width:100%;height:100%;}
@@ -76,19 +33,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .eff-pct{position:relative;z-index:1;font-size:0.4em;color:rgba(180,200,240,0.65);}
 .etitle{font-size:0.88em;font-weight:700;margin-bottom:3px;}
 .esub{font-size:0.68em;color:rgba(180,200,240,0.65);}
-
-/* METRİKLER */
 .metrics{display:flex;gap:6px;margin-bottom:13px;}
 .met{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 6px;text-align:center;position:relative;overflow:hidden;}
 .met-top{position:absolute;top:0;left:0;right:0;height:2px;}
-.met-top.bl{background:linear-gradient(90deg,#4fa8ff,#00d4c8);}
-.met-top.gr{background:linear-gradient(90deg,#00b872,#00e090);}
-.met-top.rd{background:linear-gradient(90deg,#ff5060,#ffaa40);}
+.met-top.bl{background:linear-gradient(90deg,#4fa8ff,#00d4c8);}.met-top.gr{background:linear-gradient(90deg,#00b872,#00e090);}.met-top.rd{background:linear-gradient(90deg,#ff5060,#ffaa40);}
 .met-val{font-size:1.65em;font-weight:900;line-height:1;margin-top:2px;}
 .met-val.bl{color:#a8d4ff;}.met-val.gr{color:#00e090;}.met-val.rd{color:#ff5060;}
 .met-lbl{font-size:0.54em;font-weight:700;color:rgba(140,165,210,0.38);text-transform:uppercase;margin-top:3px;}
-
-/* BARLAR */
 .bar-item{margin-bottom:9px;}
 .bar-top{display:flex;justify-content:space-between;margin-bottom:4px;}
 .bar-name{font-size:0.78em;font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -96,7 +47,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .bar-right{font-size:0.66em;color:rgba(180,200,240,0.65);}
 .bar-bg{height:6px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;}
 .bar-fill{height:100%;border-radius:3px;}
-
 .sep{height:1px;background:rgba(255,255,255,0.08);margin:12px 0;}
 .order-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:9px;margin-bottom:5px;}
 .order-name{font-size:0.82em;font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -104,14 +54,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .order-sim{font-size:0.63em;color:rgba(140,165,210,0.38);}
 .order-qty{font-size:0.76em;font-weight:800;background:rgba(0,224,144,0.1);color:#00e090;border:1px solid rgba(0,224,144,0.2);padding:2px 8px;border-radius:6px;}
 .order-total{margin-top:8px;padding:9px 12px;background:rgba(0,224,144,0.07);border:1px solid rgba(0,224,144,0.15);border-radius:9px;display:flex;justify-content:space-between;align-items:center;}
-.otl{font-size:0.68em;color:rgba(180,200,240,0.65);}
-.otv{font-size:0.98em;font-weight:900;color:#00e090;}
-
+.otl{font-size:0.68em;color:rgba(180,200,240,0.65);}.otv{font-size:0.98em;font-weight:900;color:#00e090;}
 .btn{width:100%;padding:13px;border-radius:11px;border:0;font-family:inherit;font-size:0.84em;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:8px;}
 .btn-green{background:linear-gradient(135deg,#00b872,#00e090);color:#001a0f;}
 .btn-wa{background:linear-gradient(135deg,#128c3b,#25D366);color:#fff;}
-
-/* OVERLAY / MODAL */
 .overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:600;background:rgba(5,8,18,0.9);display:flex;align-items:center;justify-content:center;padding:16px;}
 .overlay.hide{display:none;}
 .modal{background:#111827;border:1px solid rgba(255,255,255,0.15);border-radius:18px;padding:22px;width:100%;max-width:400px;max-height:88vh;overflow-y:auto;}
@@ -124,14 +70,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .mbtn-red{background:linear-gradient(135deg,#b91c1c,#ff5060);color:#fff;}
 .exp-area{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px;font-size:0.68em;color:rgba(180,200,240,0.65);white-space:pre-wrap;max-height:150px;overflow-y:auto;margin-bottom:12px;font-family:monospace;line-height:1.6;}
 .imp-ta{width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:9px;color:#e8f0ff;font-size:0.74em;min-height:75px;outline:0;resize:vertical;margin-bottom:10px;font-family:monospace;}
-
-/* TABS */
 .tabs{display:flex;gap:3px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:4px;margin-bottom:14px;}
 .tbtn{flex:1;padding:9px 6px;border-radius:8px;border:0;font-family:inherit;font-size:0.75em;font-weight:700;cursor:pointer;color:rgba(140,165,210,0.38);background:transparent;}
 .tbtn.active{background:rgba(255,255,255,0.07);color:#e8f0ff;border:1px solid rgba(255,255,255,0.08);}
 .tab{display:none;}.tab.on{display:block;}
-
-/* STOK KARTLARI */
 .inv-grid{display:flex;flex-wrap:wrap;gap:12px;}
 .icard{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px;width:100%;}
 @media(min-width:640px){.icard{width:calc(50% - 6px);}}
@@ -156,11 +98,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .sm-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(180,200,240,0.65);padding:7px 10px;border-radius:7px;cursor:pointer;font-size:0.71em;font-weight:700;font-family:inherit;}
 .sm-btn.del{color:#ff5060;}
 .add-card{background:transparent;border:2px dashed rgba(255,255,255,0.15);border-radius:18px;padding:24px;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;color:rgba(140,165,210,0.38);margin-top:12px;}
-
 .trow{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:9px;margin-bottom:5px;}
-.trow-n{font-size:0.81em;font-weight:600;}
-.trow-v{font-size:0.81em;font-weight:800;color:#ffaa40;}
-.trow-v.ok{color:#00e090;}
+.trow-n{font-size:0.81em;font-weight:600;}.trow-v{font-size:0.81em;font-weight:800;color:#ffaa40;}.trow-v.ok{color:#00e090;}
 .target-wrap{position:relative;margin-bottom:13px;}
 .target-wrap input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 38px 12px 13px;color:#e8f0ff;font-size:0.98em;font-weight:800;outline:0;font-family:inherit;}
 .target-ico{position:absolute;right:12px;top:50%;transform:translateY(-50%);}
@@ -169,124 +108,159 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .hist-tags{display:flex;flex-wrap:wrap;gap:4px;}
 .hist-tag{font-size:0.66em;font-weight:700;padding:2px 7px;background:rgba(79,168,255,0.08);color:#a8d4ff;border:1px solid rgba(79,168,255,0.15);border-radius:5px;}
 .empty{font-size:0.78em;color:rgba(140,165,210,0.38);text-align:center;padding:16px;}
-
 .toast{position:fixed;top:16px;right:14px;z-index:700;background:#111827;border:1px solid rgba(255,255,255,0.15);border-radius:11px;padding:11px 15px;font-size:0.78em;font-weight:700;box-shadow:0 12px 28px rgba(0,0,0,0.5);display:flex;align-items:center;gap:7px;max-width:260px;transform:translateX(110%);transition:transform 0.3s;}
 .toast.on{transform:translateX(0);}
 .toast.s{border-left:3px solid #00e090;}.toast.i{border-left:3px solid #4fa8ff;}.toast.w{border-left:3px solid #ffaa40;}
 </style>
 </head>
 <body>
-
 <div class="bg-orb bg-orb1"></div>
 <div class="bg-orb bg-orb2"></div>
 <div class="bg-orb bg-orb3"></div>
 <div class="toast" id="toast"></div>
-
-<!-- TUR -->
 <div id="tour-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;background:rgba(5,8,18,0.7);"></div>
 <div id="tour-box" style="display:none;position:fixed;z-index:501;bottom:24px;left:50%;transform:translateX(-50%);width:92vw;max-width:420px;background:#111827;border:2px solid #4fa8ff;border-radius:18px;padding:20px 20px 16px;box-shadow:0 8px 40px rgba(0,0,0,0.7);">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-    <div id="tour-step-num" style="font-size:0.62em;font-weight:700;color:rgba(79,168,255,0.8);letter-spacing:1px;text-transform:uppercase;"></div>
-    <div id="tour-dots" style="display:flex;gap:5px;"></div>
-  </div>
-  <div id="tour-title" style="font-size:1em;font-weight:800;color:#e8f0ff;margin-bottom:7px;"></div>
-  <div id="tour-desc" style="font-size:0.8em;color:rgba(180,200,240,0.75);line-height:1.6;margin-bottom:16px;"></div>
-  <div style="display:flex;justify-content:space-between;align-items:center;">
-    <button id="tour-skip" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:rgba(180,200,240,0.5);padding:8px 16px;font-size:0.76em;font-weight:600;cursor:pointer;font-family:inherit;">Atla</button>
-    <button id="tour-next" style="background:linear-gradient(135deg,#1a6ef5,#4fa8ff);border:0;border-radius:8px;color:#fff;padding:9px 20px;font-size:0.82em;font-weight:700;cursor:pointer;font-family:inherit;">İleri →</button>
-  </div>
-</div>
-<div id="tour-hl" style="display:none;position:fixed;z-index:499;border-radius:14px;box-shadow:0 0 0 4px #4fa8ff,0 0 0 8px rgba(79,168,255,0.25),0 0 30px rgba(79,168,255,0.3);pointer-events:none;"></div>
-
-<!-- MODALLER -->
-<div class="overlay hide" id="m-order">
-  <div class="modal">
-    <h2>✅ Siparişi Onayla</h2>
-    <p>Hesaplanan miktarlar stoğa eklenecek ve geçmişe kaydedilecek.</p>
-    <div class="mbtns">
-      <button class="mbtn mbtn-c" id="order-cancel">Vazgeç</button>
-      <button class="mbtn mbtn-ok" id="order-ok">Ekle</button>
-    </div>
-  </div>
-</div>
-<div class="overlay hide" id="m-reset">
-  <div class="modal">
-    <h2>⚠️ Sıfırla</h2>
-    <p>Tüm stok verileri ve sipariş geçmişi silinecek. Geri alınamaz!</p>
-    <div class="mbtns">
-      <button class="mbtn mbtn-c" id="reset-cancel">Vazgeç</button>
-      <button class="mbtn mbtn-red" id="reset-ok">Sıfırla</button>
-    </div>
-  </div>
-</div>
-<div class="overlay hide" id="m-exp">
-  <div class="modal">
-    <h2>📤 Dışa Aktar</h2>
-    <p>Bu veriyi kopyalayıp başka cihazda yükleyebilirsiniz.</p>
-    <div class="exp-area" id="expArea"></div>
-    <div class="mbtns">
-      <button class="mbtn mbtn-c" id="exp-close">Kapat</button>
-      <button class="mbtn mbtn-ok" id="exp-copy">Kopyala</button>
-    </div>
-  </div>
-</div>
-<div class="overlay hide" id="m-imp">
-  <div class="modal">
-    <h2>📥 İçe Aktar</h2>
-    <p>Dışa aktarılan JSON verisini yapıştırın.</p>
-    <textarea class="imp-ta" id="impArea" placeholder='{"levels":[]}'></textarea>
-    <div class="mbtns">
-      <button class="mbtn mbtn-c" id="imp-cancel">Vazgeç</button>
-      <button class="mbtn mbtn-ok" id="imp-ok">Yükle</button>
-    </div>
-  </div>
-</div>
-
-<!-- ANA EKRAN -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+<div id="tour-step-num" style="font-size:0.62em;font-weight:700;color:rgba(79,168,255,0.8);letter-spacing:1px;text-transform:uppercase;"></div>
+<div id="tour-dots" style="display:flex;gap:5px;"></div></div>
+<div id="tour-title" style="font-size:1em;font-weight:800;color:#e8f0ff;margin-bottom:7px;"></div>
+<div id="tour-desc" style="font-size:0.8em;color:rgba(180,200,240,0.75);line-height:1.6;margin-bottom:16px;"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<button id="tour-skip" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:rgba(180,200,240,0.5);padding:8px 16px;font-size:0.76em;font-weight:600;cursor:pointer;font-family:inherit;">Atla</button>
+<button id="tour-next" style="background:linear-gradient(135deg,#1a6ef5,#4fa8ff);border:0;border-radius:8px;color:#fff;padding:9px 20px;font-size:0.82em;font-weight:700;cursor:pointer;font-family:inherit;">İleri</button>
+</div></div>
+<div id="tour-hl" style="display:none;position:fixed;z-index:499;border-radius:14px;box-shadow:0 0 0 4px #4fa8ff,0 0 0 8px rgba(79,168,255,0.25);pointer-events:none;"></div>
+<div class="overlay hide" id="m-order"><div class="modal"><h2>Siparişi Onayla</h2><p>Hesaplanan miktarlar stoğa eklenecek ve geçmişe kaydedilecek.</p><div class="mbtns"><button class="mbtn mbtn-c" id="order-cancel">Vazgeç</button><button class="mbtn mbtn-ok" id="order-ok">Ekle</button></div></div></div>
+<div class="overlay hide" id="m-reset"><div class="modal"><h2>Sıfırla</h2><p>Tüm stok verileri ve sipariş geçmişi silinecek. Geri alınamaz!</p><div class="mbtns"><button class="mbtn mbtn-c" id="reset-cancel">Vazgeç</button><button class="mbtn mbtn-red" id="reset-ok">Sıfırla</button></div></div></div>
+<div class="overlay hide" id="m-exp"><div class="modal"><h2>Dışa Aktar</h2><p>Bu veriyi kopyalayıp başka cihazda yükleyebilirsiniz.</p><div class="exp-area" id="expArea"></div><div class="mbtns"><button class="mbtn mbtn-c" id="exp-close">Kapat</button><button class="mbtn mbtn-ok" id="exp-copy">Kopyala</button></div></div></div>
+<div class="overlay hide" id="m-imp"><div class="modal"><h2>İçe Aktar</h2><p>Dışa aktarılan JSON verisini yapıştırın.</p><textarea class="imp-ta" id="impArea" placeholder='{"levels":[]}'></textarea><div class="mbtns"><button class="mbtn mbtn-c" id="imp-cancel">Vazgeç</button><button class="mbtn mbtn-ok" id="imp-ok">Yükle</button></div></div></div>
 <div class="app">
-  <div class="header" id="el-header">
-    <div class="logo">
-      <div class="logo-icon">⚡</div>
-      <span class="logo-text">Batarya Stok Takip</span>
-    </div>
-    <div class="hright">
-      <div class="hclock" id="clk">--:--:--</div>
-      <button class="hbtn" id="btn-exp">📤 Aktar</button>
-      <button class="hbtn" id="btn-imp">📥 İçe Al</button>
-      <button class="hbtn red" id="btn-reset">🗑 Sıfırla</button>
-    </div>
-  </div>
-
-  <div class="layout">
-    <div class="sidebar" id="el-sidebar">
-      <div class="card" id="el-verimlilik">
-        <div class="clbl"><span class="pip"></span> Stok Verimliliği</div>
-        <div class="eff-block">
-          <div class="eff-circle">
-            <svg viewBox="0 0 66 66" style="position:absolute;top:0;left:0;width:100%;height:100%;transform:rotate(-90deg);">
-              <circle cx="33" cy="33" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
-              <circle id="effArc" cx="33" cy="33" r="26" fill="none" stroke="#4fa8ff" stroke-width="6"
-                stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="163" style="transition:stroke-dashoffset 0.8s,stroke 0.4s;"/>
-            </svg>
-            <div class="eff-num" id="effNum">0</div>
-            <div class="eff-pct">%</div>
-          </div>
-          <div>
-            <div class="etitle" id="effTitle">Hesaplanıyor</div>
-            <div class="esub" id="effSub">—</div>
-          </div>
-        </div>
-        <div class="metrics">
-          <div class="met"><div class="met-top gr"></div><div class="met-val gr" id="mProd">0</div><div class="met-lbl">🔋 Üretilebilir</div></div>
-          <div class="met"><div class="met-top bl"></div><div class="met-val bl" id="mTot">0</div><div class="met-lbl">📦 Toplam KAP</div></div>
-          <div class="met"><div class="met-top rd"></div><div class="met-val rd" id="mCrit">0</div><div class="met-lbl">⚠ Kritik</div></div>
-        </div>
-        <div class="clbl"><span class="pip g"></span> Mevcut Stok</div>
-        <div id="barArea"></div>
-      </div>
-      <div class="card" id="el-siparis">
-        <div class="clbl"><span class="pip g"></span> Sipariş Planı · 52 KAP</div>
-        <div id="orderArea"></div>
-        <button class="btn btn-wa" id="btn-wa">💬 WhatsApp ile Paylaş</button>
-        <button class="btn btn-green" id="btn-order">✅ Siparişi Stoğa Ekle</button>
-      </di
+<div class="header" id="el-header"><div class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Batarya Stok Takip</span></div><div class="hright"><div class="hclock" id="clk">--:--:--</div><button class="hbtn" id="btn-exp">📤 Aktar</button><button class="hbtn" id="btn-imp">📥 İçe Al</button><button class="hbtn red" id="btn-reset">🗑 Sıfırla</button></div></div>
+<div class="layout">
+<div class="sidebar" id="el-sidebar">
+<div class="card" id="el-verimlilik"><div class="clbl"><span class="pip"></span> Stok Verimliliği</div><div class="eff-block"><div class="eff-circle"><svg viewBox="0 0 66 66" style="position:absolute;top:0;left:0;width:100%;height:100%;transform:rotate(-90deg);"><circle cx="33" cy="33" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/><circle id="effArc" cx="33" cy="33" r="26" fill="none" stroke="#4fa8ff" stroke-width="6" stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="163" style="transition:stroke-dashoffset 0.8s,stroke 0.4s;"/></svg><div class="eff-num" id="effNum">0</div><div class="eff-pct">%</div></div><div><div class="etitle" id="effTitle">Hesaplanıyor</div><div class="esub" id="effSub">—</div></div></div><div class="metrics"><div class="met"><div class="met-top gr"></div><div class="met-val gr" id="mProd">0</div><div class="met-lbl">Üretilebilir</div></div><div class="met"><div class="met-top bl"></div><div class="met-val bl" id="mTot">0</div><div class="met-lbl">Toplam KAP</div></div><div class="met"><div class="met-top rd"></div><div class="met-val rd" id="mCrit">0</div><div class="met-lbl">Kritik</div></div></div><div class="clbl"><span class="pip g"></span> Mevcut Stok</div><div id="barArea"></div></div>
+<div class="card" id="el-siparis"><div class="clbl"><span class="pip g"></span> Sipariş Planı 52 KAP</div><div id="orderArea"></div><button class="btn btn-wa" id="btn-wa">💬 WhatsApp ile Paylaş</button><button class="btn btn-green" id="btn-order">✅ Siparişi Stoğa Ekle</button></div>
+<div class="card"><div class="clbl"><span class="pip p"></span> Sipariş Geçmişi</div><div id="histArea"></div></div>
+</div>
+<div class="main-col"><div class="tabs" id="el-tabs"><button class="tbtn active" id="tb-inventory">📦 Stok</button><button class="tbtn" id="tb-target">🎯 Hedef</button><button class="tbtn" id="tb-alerts">🔔 Uyarılar</button></div>
+<div class="tab on" id="tp-inventory"><div class="inv-grid" id="invGrid"></div><div class="add-card" id="addCard"><div style="font-size:1.7em">+</div><div style="font-size:0.78em;font-weight:600;">Yeni Parça Ekle</div></div></div>
+<div class="tab" id="tp-target"><div class="card"><div class="clbl"><span class="pip"></span> Hedef Batarya Sayısı</div><div class="target-wrap"><input type="number" id="targetIn" value="100"><span class="target-ico">🔋</span></div><div id="targetArea"></div></div><div class="card"><div class="clbl"><span class="pip g"></span> Sipariş Sonrası Simülasyon</div><div id="simArea"></div></div></div>
+<div class="tab" id="tp-alerts"><div class="card"><div class="clbl"><span class="pip r"></span> Aktif Uyarılar</div><div id="alertArea"></div></div></div>
+</div></div></div>
+<script>
+var DEF={levels:[{id:1,name:'AE',stock:56,minStock:5,perBox:12,perBattery:4,color:'#4fa8ff'},{id:2,name:'FE',stock:56,minStock:5,perBox:6,perBattery:2,color:'#00e090'},{id:3,name:'GE',stock:91,minStock:5,perBox:6,perBattery:3,color:'#b080ff'}],history:[]};
+var S=loadState(),nid=20,toastTimer=null,tStep=0;
+for(var i=0;i<S.levels.length;i++){if(S.levels[i].id>=nid)nid=S.levels[i].id+1;}
+function loadState(){try{var r=localStorage.getItem('bst6');if(r){var d=JSON.parse(r);if(d&&d.levels&&d.levels.length)return d;}}catch(e){}return JSON.parse(JSON.stringify(DEF));}
+function save(){try{localStorage.setItem('bst6',JSON.stringify(S));}catch(e){}}
+function cpk(l){return(l.perBox||1)/(l.perBattery||1);}
+function capOf(l){return l.stock*cpk(l);}
+function getLvl(id){for(var i=0;i<S.levels.length;i++){if(S.levels[i].id===id)return S.levels[i];}return null;}
+function ge(id){return document.getElementById(id);}
+function st(id,v){var e=ge(id);if(e)e.textContent=v;}
+function sh(id,v){var e=ge(id);if(e)e.innerHTML=v;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function bind(id,fn){var e=ge(id);if(e)e.addEventListener('click',fn);}
+var TOUR=[
+{el:'el-header',title:'Üst Menü',desc:'Buradan verileri dışa aktarabilir, başka cihazdan içe alabilir veya sıfırlayabilirsiniz.'},
+{el:'el-tabs',title:'Sekmeler',desc:'Stok sekmesinde parça girişi yaparsınız. Hedef sekmesinde kaç batarya üretmek istediğinizi girebilirsiniz. Uyarılar sekmesinde kritik stokları görürsünüz.'},
+{el:'invGrid',title:'Stok Kartları',desc:'Her parça için bir kart var. Buraya o parçadan kaç KAP olduğunu girin. Değiştirince otomatik kaydedilir.'},
+{el:'el-verimlilik',title:'Stok Verimliliği',desc:'Girdiğiniz stoklarla kaç batarya üretilebileceği buradan görülür. Yüzde ne kadar yüksekse stoklar o kadar dengeli.'},
+{el:'el-siparis',title:'Sipariş Planı',desc:'52 KAP bütçeyle optimum sipariş miktarları otomatik hesaplanır, çift sayıya yuvarlanır. Onaylayınca stok güncellenir ve geçmişe kaydedilir.'}
+];
+function buildDots(){var d=ge('tour-dots');if(!d)return;var h='';for(var i=0;i<TOUR.length;i++)h+='<div id="td'+i+'" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);display:inline-block;"></div>';d.innerHTML=h;}
+function showStep(n){
+var step=TOUR[n];
+ge('tour-overlay').style.display='block';
+ge('tour-box').style.display='block';
+ge('tour-step-num').textContent='ADIM '+(n+1)+' / '+TOUR.length;
+ge('tour-title').textContent=step.title;
+ge('tour-desc').textContent=step.desc;
+for(var i=0;i<TOUR.length;i++){var dot=ge('td'+i);if(dot)dot.style.cssText='width:'+(i===n?'18':'6')+'px;height:6px;border-radius:3px;background:'+(i===n?'#4fa8ff':'rgba(255,255,255,0.2)')+';display:inline-block;margin-right:4px;';}
+var nb=ge('tour-next');if(nb){nb.textContent=n===TOUR.length-1?'Tamamla':'İleri';nb.style.background=n===TOUR.length-1?'linear-gradient(135deg,#00b872,#00e090)':'linear-gradient(135deg,#1a6ef5,#4fa8ff)';}
+var target=ge(step.el);
+if(target){var r=target.getBoundingClientRect();var hl=ge('tour-hl');hl.style.display='block';hl.style.top=(r.top-6)+'px';hl.style.left=(r.left-6)+'px';hl.style.width=(r.width+12)+'px';hl.style.height=(r.height+12)+'px';}
+else{ge('tour-hl').style.display='none';}
+tStep=n;}
+function endTour(){ge('tour-overlay').style.display='none';ge('tour-box').style.display='none';ge('tour-hl').style.display='none';try{localStorage.setItem('bst6_tour','1');}catch(e){}}
+window.onload=function(){
+renderInv();calc();renderHist();updateClock();setInterval(updateClock,1000);
+bind('tour-next',function(){if(tStep>=TOUR.length-1){endTour();}else showStep(tStep+1);});
+bind('tour-skip',endTour);
+bind('btn-exp',openExp);bind('btn-imp',function(){show('m-imp');});bind('btn-reset',function(){show('m-reset');});
+bind('order-cancel',function(){hide('m-order');});bind('order-ok',doOrder);
+bind('reset-cancel',function(){hide('m-reset');});bind('reset-ok',doReset);
+bind('exp-close',function(){hide('m-exp');});bind('exp-copy',doCopy);
+bind('imp-cancel',function(){hide('m-imp');});bind('imp-ok',doImport);
+bind('btn-wa',shareWA);bind('btn-order',function(){show('m-order');});
+bind('tb-inventory',function(){switchTab('inventory');});bind('tb-target',function(){switchTab('target');});bind('tb-alerts',function(){switchTab('alerts');});
+bind('addCard',addLvl);
+var tin=ge('targetIn');if(tin)tin.addEventListener('input',calc);
+var seen=null;try{seen=localStorage.getItem('bst6_tour');}catch(e){}
+if(!seen){buildDots();setTimeout(function(){showStep(0);},600);}
+};
+function show(id){var e=ge(id);if(e)e.className='overlay';}
+function hide(id){var e=ge(id);if(e)e.className='overlay hide';}
+function updateClock(){var e=ge('clk');if(e)e.textContent=new Date().toLocaleTimeString('tr-TR');}
+function switchTab(name){var tabs=['inventory','target','alerts'];for(var i=0;i<tabs.length;i++){var tp=ge('tp-'+tabs[i]);var tb=ge('tb-'+tabs[i]);if(tp)tp.className='tab'+(tabs[i]===name?' on':'');if(tb)tb.className='tbtn'+(tabs[i]===name?' active':'');}}
+function renderInv(){
+var caps=[];for(var i=0;i<S.levels.length;i++)caps.push(capOf(S.levels[i]));
+var minC=caps.length?Math.min.apply(null,caps):0;
+var g=ge('invGrid');if(!g)return;g.innerHTML='';
+for(var i=0;i<S.levels.length;i++){
+var l=S.levels[i];var c=Math.floor(caps[i]);
+var isCrit=l.stock<=l.minStock;var isNeck=Math.abs(caps[i]-minC)<0.001;
+var cls=isCrit?'crit':isNeck?'neck':'';
+var bH='<span class="badge b-cap">'+c+' bat.</span>';
+if(isCrit)bH+='<span class="badge b-crit">Kritik</span>';
+else if(isNeck)bH+='<span class="badge b-neck">Bottleneck</span>';
+var div=document.createElement('div');div.className='icard '+cls;div.id='c-'+l.id;
+div.innerHTML='<div class="icard-top"><div><input class="iname" type="text" value="'+esc(l.name)+'" data-id="'+l.id+'" data-f="name"><div class="isub">'+(l.stock*l.perBox)+' pil - '+c+' bat.</div></div><div class="badges">'+bH+'</div></div><div class="inp-grid"><div class="inp-wrap"><label class="inp-lbl">Stok KAP</label><input class="inp" type="number" value="'+l.stock+'" data-id="'+l.id+'" data-f="stock"></div><div class="inp-wrap"><label class="inp-lbl">Kritik</label><input class="inp" type="number" value="'+l.minStock+'" data-id="'+l.id+'" data-f="minStock"></div><div class="inp-wrap"><label class="inp-lbl">KAP/Pil</label><input class="inp" type="number" value="'+l.perBox+'" data-id="'+l.id+'" data-f="perBox"></div><div class="inp-wrap"><label class="inp-lbl">Bat/Basina</label><input class="inp" type="number" value="'+l.perBattery+'" data-id="'+l.id+'" data-f="perBattery"></div></div><div class="ifoot"><button class="sm-btn del" data-del="'+l.id+'">Sil</button></div>';
+g.appendChild(div);}
+g.addEventListener('input',function(e){var el=e.target;var id=parseInt(el.getAttribute('data-id'));var f=el.getAttribute('data-f');if(!id||!f)return;var l=getLvl(id);if(!l)return;l[f]=(f==='name')?el.value.toUpperCase().substring(0,6):(parseInt(el.value)||0);save();calc();});
+g.addEventListener('change',function(e){var el=e.target;var id=parseInt(el.getAttribute('data-id'));var f=el.getAttribute('data-f');if(!id||!f)return;var l=getLvl(id);if(!l)return;l[f]=(f==='name')?el.value.toUpperCase().substring(0,6):(parseInt(el.value)||0);save();calc();});
+g.addEventListener('click',function(e){var el=e.target;var did=el.getAttribute('data-del');if(!did)return;delLvl(parseInt(did));});}
+function calc(){
+if(!S.levels.length)return;
+var CK=[],caps=[],totStock=0,critCount=0;
+for(var i=0;i<S.levels.length;i++){CK.push(cpk(S.levels[i]));caps.push(S.levels[i].stock*CK[i]);totStock+=S.levels[i].stock;if(S.levels[i].stock<=S.levels[i].minStock)critCount++;}
+var minC=Math.floor(Math.min.apply(null,caps));var maxC=Math.max.apply(null,caps)||1;
+var sum=0;for(var i=0;i<caps.length;i++)sum+=caps[i];
+var score=sum>0?Math.round((minC/(sum/caps.length))*100):0;if(score>100)score=100;
+st('mProd',minC);st('mTot',totStock);st('mCrit',critCount);st('effNum',score);
+st('effTitle',score>=80?'Dengeli Stok':score>=50?'Orta Denge':'Dengesiz Stok');
+st('effSub','Su an '+minC+' batarya uretilebilir');
+var arc=ge('effArc');if(arc){arc.style.strokeDashoffset=String(163-163*score/100);arc.style.stroke=score>=80?'#4fa8ff':score>=50?'#ffaa40':'#ff5060';}
+var bH='';for(var i=0;i<S.levels.length;i++){var l=S.levels[i];var isN=Math.abs(caps[i]-Math.min.apply(null,caps))<0.001;var col=isN?'#ff5060':l.color;var ratio=Math.min(100,(caps[i]/maxC)*100);bH+='<div class="bar-item"><div class="bar-top"><div class="bar-name"><div class="bdot" style="background:'+col+'"></div>'+esc(l.name)+'</div><div class="bar-right">'+l.stock+' KAP - '+Math.floor(caps[i])+' bat.</div></div><div class="bar-bg"><div class="bar-fill" style="width:'+ratio+'%;background:'+col+'"></div></div></div>';}
+sh('barArea',bH);
+var T=52,sim=[],rem=T;for(var i=0;i<S.levels.length;i++)sim.push(S.levels[i].stock);
+for(var it=0;it<1000&&rem>0.001;it++){var c=[];for(var i=0;i<sim.length;i++)c.push(sim[i]*CK[i]);var mn=Math.min.apply(null,c);var mi=[];for(var i=0;i<c.length;i++){if(Math.abs(c[i]-mn)<0.001)mi.push(i);}var oth=[];for(var i=0;i<c.length;i++){if(mi.indexOf(i)<0)oth.push(c[i]);}var nxt=oth.length?Math.min.apply(null,oth):mn+rem*CK[mi[0]];var gap=nxt-mn,need=0;for(var j=0;j<mi.length;j++)need+=gap/CK[mi[j]];if(need<=rem+0.001){for(var j=0;j<mi.length;j++)sim[mi[j]]+=gap/CK[mi[j]];rem-=need;}else{var si=0;for(var j=0;j<mi.length;j++)si+=1/CK[mi[j]];var dc=rem/si;for(var j=0;j<mi.length;j++)sim[mi[j]]+=dc/CK[mi[j]];rem=0;break;}}
+var ord=[],ro=[];for(var i=0;i<S.levels.length;i++){ord.push(Math.max(0,sim[i]-S.levels[i].stock));ro.push(Math.floor(ord[i]));}
+var df=T;for(var i=0;i<ro.length;i++)df-=ro[i];
+var fr=[];for(var i=0;i<ord.length;i++)fr.push({idx:i,f:ord[i]-ro[i]});fr.sort(function(a,b){return b.f-a.f;});for(var k=0;k<df&&k<fr.length;k++)ro[fr[k].idx]++;
+for(var i=0;i<ro.length;i++){if(ro[i]%2!==0)ro[i]++;}
+var nt=0;for(var i=0;i<ro.length;i++)nt+=ro[i];
+while(nt>T){var mx=0;for(var i=1;i<ro.length;i++){if(ro[i]>ro[mx])mx=i;}if(ro[mx]>=2){ro[mx]-=2;nt-=2;}else break;}
+while(nt<T){var mn2=0;for(var i=1;i<ro.length;i++){if(ro[i]<ro[mn2])mn2=i;}ro[mn2]+=2;nt+=2;}
+var sC=[];for(var i=0;i<S.levels.length;i++)sC.push(Math.floor((S.levels[i].stock+ro[i])*CK[i]));var sM=Math.min.apply(null,sC);
+var oH='';for(var i=0;i<S.levels.length;i++){S.levels[i].lastOrder=ro[i];oH+='<div class="order-row"><div class="order-name"><div class="bdot" style="background:'+S.levels[i].color+'"></div>'+esc(S.levels[i].name)+'</div><div class="order-r"><span class="order-sim">'+sC[i]+' bat.</span><span class="order-qty">+'+ro[i]+' KAP</span></div></div>';}
+oH+='<div class="order-total"><span class="otl">Siparis Sonrasi</span><span class="otv">'+sM+' bat.</span></div>';sh('orderArea',oH);
+for(var i=0;i<S.levels.length;i++){var card=ge('c-'+S.levels[i].id);if(!card)continue;var isCrit=S.levels[i].stock<=S.levels[i].minStock;var isNeck=Math.abs(caps[i]-Math.min.apply(null,caps))<0.001;card.className='icard'+(isCrit?' crit':isNeck?' neck':'');}
+var tv=0;var tin=ge('targetIn');if(tin)tv=parseInt(tin.value)||0;
+var tH='',sH='';for(var i=0;i<S.levels.length;i++){var l=S.levels[i];var miss=Math.max(0,Math.ceil((tv*l.perBattery-l.stock*l.perBox)/l.perBox));var ok=miss===0;tH+='<div class="trow"><span class="trow-n">'+esc(l.name)+' icin eksik</span><span class="trow-v'+(ok?' ok':'')+'">'+( ok?'Yeterli':miss+' KAP')+'</span></div>';var ns=l.stock+(l.lastOrder||0);var nc=Math.floor(ns*CK[i]);sH+='<div class="trow"><span class="trow-n">'+esc(l.name)+': '+l.stock+' - '+ns+' KAP</span><span class="trow-v ok">'+nc+' bat.</span></div>';}
+sh('targetArea',tH);sh('simArea',sH);
+var aH='',minCap=Math.min.apply(null,caps);for(var i=0;i<S.levels.length;i++){var l=S.levels[i];if(l.stock<=l.minStock)aH+='<div class="trow" style="border-left:3px solid #ff5060"><div><div style="font-weight:700;font-size:0.84em">'+esc(l.name)+' - Kritik Stok</div><div style="font-size:0.68em;color:rgba(180,200,240,0.65);margin-top:2px">'+l.stock+' KAP / Sinir '+l.minStock+'</div></div></div>';if(Math.abs(caps[i]-minCap)<0.001)aH+='<div class="trow" style="border-left:3px solid #ffaa40"><div><div style="font-weight:700;font-size:0.84em">'+esc(l.name)+' - Bottleneck</div><div style="font-size:0.68em;color:rgba(180,200,240,0.65);margin-top:2px">'+Math.floor(caps[i])+' bat.</div></div></div>';}
+sh('alertArea',aH||'<div class="empty" style="color:#00e090">Tum stoklar normal</div>');}
+function renderHist(){var h=ge('histArea');if(!h)return;if(!S.history||!S.history.length){h.innerHTML='<div class="empty">Henuz kayit yok</div>';return;}var html='',list=S.history.slice().reverse();for(var i=0;i<Math.min(list.length,8);i++){var x=list[i];var tags='';for(var j=0;j<x.items.length;j++)tags+='<span class="hist-tag">'+esc(x.items[j].name)+' +'+x.items[j].qty+'</span>';html+='<div class="hist"><div class="hist-date">'+x.date+'</div><div class="hist-tags">'+tags+'</div></div>';}h.innerHTML=html;}
+function addLvl(){var cols=['#ff5060','#d29922','#39d353','#a371f7','#f97316'];var used=[];for(var i=0;i<S.levels.length;i++)used.push(S.levels[i].color);var color=cols[nid%cols.length];for(var k=0;k<cols.length;k++){if(used.indexOf(cols[k])<0){color=cols[k];break;}}S.levels.push({id:nid++,name:'P'+(S.levels.length+1),stock:50,minStock:5,perBox:6,perBattery:1,color:color});save();renderInv();calc();showToast('Parca eklendi','s');}
+function delLvl(id){if(S.levels.length<=1){showToast('En az 1 parca olmali','w');return;}var nl=[];for(var i=0;i<S.levels.length;i++){if(S.levels[i].id!==id)nl.push(S.levels[i]);}S.levels=nl;save();renderInv();calc();showToast('Parca silindi','i');}
+function doOrder(){var items=[];for(var i=0;i<S.levels.length;i++)items.push({name:S.levels[i].name,qty:S.levels[i].lastOrder||0});for(var i=0;i<S.levels.length;i++)S.levels[i].stock+=(S.levels[i].lastOrder||0);if(!S.history)S.history=[];S.history.push({date:new Date().toLocaleString('tr-TR'),items:items});save();hide('m-order');renderInv();calc();renderHist();showToast('Siparis stoga eklendi','s');}
+function doReset(){S=JSON.parse(JSON.stringify(DEF));nid=20;save();hide('m-reset');renderInv();calc();renderHist();showToast('Veriler sifirlandi','i');}
+function shareWA(){var t='SIPARIS LISTESI - '+new Date().toLocaleDateString('tr-TR')+'\n--------------------\n';for(var i=0;i<S.levels.length;i++)t+='- '+S.levels[i].name+': '+(S.levels[i].lastOrder||0)+' KAP\n';t+='--------------------\nTOPLAM: 52 KAP';window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
+function openExp(){var ea=ge('expArea');if(ea)ea.textContent=JSON.stringify(S,null,2);show('m-exp');}
+function doCopy(){var ea=ge('expArea');if(!ea)return;try{navigator.clipboard.writeText(ea.textContent);showToast('Kopyalandi','s');}catch(e){showToast('Kopyalanamadi','w');}}
+function doImport(){try{var ta=ge('impArea');var p=JSON.parse(ta?ta.value:'');if(!p.levels)throw'err';S=p;if(!S.history)S.history=[];save();hide('m-imp');renderInv();calc();renderHist();showToast('Veri yuklendi','s');}catch(e){showToast('Gecersiz format','w');}}
+function showToast(msg,type){var t=ge('toast');if(!t)return;t.textContent=msg;t.className='toast on '+(type||'i');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.className='toast';},2800);}
+</script>
+</body>
+</html>
