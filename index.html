@@ -126,9 +126,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .toast.s{border-left:3px solid #00e090;}.toast.i{border-left:3px solid #4fa8ff;}.toast.w{border-left:3px solid #ffaa40;}
 
 /* TUR */
-.tur-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:800;pointer-events:none;}
-.tur-overlay.aktif{pointer-events:all;}
-.tur-karti{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:801;width:92vw;max-width:400px;background:#111827;border:2px solid #4fa8ff;border-radius:18px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,0.8);display:none;}
+.tur-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:800;pointer-events:none;background:transparent;}
+.tur-overlay.aktif{pointer-events:all;background:rgba(5,8,18,0.5);}
+.tur-karti{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:901;width:92vw;max-width:400px;background:#111827;border:2px solid #4fa8ff;border-radius:18px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,0.9);display:none;}
 .tur-karti.goster{display:block;}
 .tur-adim{font-size:0.6em;font-weight:700;color:rgba(79,168,255,0.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
 .tur-baslik{font-size:0.98em;font-weight:800;color:#e8f0ff;margin-bottom:6px;}
@@ -142,8 +142,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tur-btn.atla{background:rgba(255,255,255,0.06);color:rgba(180,200,240,0.5);}
 .tur-btn.ileri{background:linear-gradient(135deg,#1a6ef5,#4fa8ff);color:#fff;}
 .tur-btn.tamam{background:linear-gradient(135deg,#00b872,#00e090);color:#001a0f;}
-.tur-hl{position:fixed;z-index:799;border-radius:14px;pointer-events:none;box-shadow:0 0 0 4px #4fa8ff,0 0 0 2000px rgba(5,8,18,0.75);display:none;transition:all 0.35s ease;}
-.tur-hl.goster{display:block;}
+.tur-vurgu{outline:3px solid #4fa8ff !important;outline-offset:4px;border-radius:16px;}
 </style>
 </head>
 <body>
@@ -154,7 +153,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <!-- TUR -->
 <div class="tur-overlay" id="turOverlay"></div>
-<div class="tur-hl" id="turHl"></div>
 <div class="tur-karti" id="turKarti">
   <div class="tur-adim" id="turAdim"></div>
   <div class="tur-baslik" id="turBaslik"></div>
@@ -344,6 +342,7 @@ var TUR_ADIMLAR=[
   {el:'el-tabs',      baslik:'Sekmeler',           aciklama:'Stok: parca girisi. Hedef: kac batarya uretmek istediginizi girin. Uyarilar: kritik stoklari gorun.'}
 ];
 var turAdim=0;
+var turOncekiEl=null;
 
 function turBaslat(){
   turAdim=0;
@@ -357,6 +356,8 @@ function turNoktalarOlustur(){
   d.innerHTML=h;
 }
 function turGoster(n){
+  // Önceki vurguyu kaldır
+  if(turOncekiEl){turOncekiEl.classList.remove('tur-vurgu');turOncekiEl=null;}
   var adim=TUR_ADIMLAR[n];
   st('turAdim','ADIM '+(n+1)+' / '+TUR_ADIMLAR.length);
   st('turBaslik',adim.baslik);
@@ -367,18 +368,15 @@ function turGoster(n){
     if(n===TUR_ADIMLAR.length-1){nb.textContent='Tamamla';nb.className='tur-btn tamam';}
     else{nb.textContent='Ileri';nb.className='tur-btn ileri';}
   }
-  // Highlight
+  // Elementi vurgula ve scroll et
   var hedef=ge(adim.el);
-  var hl=ge('turHl');
-  var kart=ge('turKarti');
-  if(hedef&&hl){
-    var r=hedef.getBoundingClientRect();
-    hl.style.top=(r.top-6)+'px';
-    hl.style.left=(r.left-6)+'px';
-    hl.style.width=(r.width+12)+'px';
-    hl.style.height=(r.height+12)+'px';
-    hl.className='tur-hl goster';
+  if(hedef){
+    hedef.classList.add('tur-vurgu');
+    turOncekiEl=hedef;
+    // Kartın üstüne scroll et, altta tur kutusu için boşluk bırak
+    hedef.scrollIntoView({behavior:'smooth',block:'center'});
   }
+  var kart=ge('turKarti');
   if(kart)kart.className='tur-karti goster';
   turAdim=n;
 }
@@ -387,8 +385,8 @@ function turIleri(){
   else{turGoster(turAdim+1);}
 }
 function turBitir(){
+  if(turOncekiEl){turOncekiEl.classList.remove('tur-vurgu');turOncekiEl=null;}
   var o=ge('turOverlay');if(o)o.className='tur-overlay';
-  var hl=ge('turHl');if(hl)hl.className='tur-hl';
   var k=ge('turKarti');if(k)k.className='tur-karti';
   try{localStorage.setItem('bst7_tour','1');}catch(e){}
 }
