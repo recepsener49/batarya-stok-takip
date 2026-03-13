@@ -167,8 +167,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- MODALLER -->
-<div class="overlay hide" id="m-order"><div class="modal"><h2>Siparisi Onayla</h2><p>Hesaplanan miktarlar stoga eklenecek ve gecmise kaydedilecek.</p><div class="mbtns"><button class="mbtn mbtn-c" id="order-cancel">Vazgec</button><button class="mbtn mbtn-ok" id="order-ok">Ekle</button></div></div></div>
-<div class="overlay hide" id="m-reset"><div class="modal"><h2>Sifirla</h2><p>Tum stok verileri ve siparis gecmisi silinecek. Geri alinamaz!</p><div class="mbtns"><button class="mbtn mbtn-c" id="reset-cancel">Vazgec</button><button class="mbtn mbtn-red" id="reset-ok">Sifirla</button></div></div></div>
+<div class="overlay hide" id="m-order"><div class="modal"><h2>Siparişi Onayla</h2><p>Hesaplanan miktarlar stoğa eklenecek ve geçmişe kaydedilecek.</p><div class="mbtns"><button class="mbtn mbtn-c" id="order-cancel">Vazgeç</button><button class="mbtn mbtn-ok" id="order-ok">Ekle</button></div></div></div>
+<div class="overlay hide" id="m-reset"><div class="modal"><h2>Sıfırla</h2><p>Tüm stok verileri ve sipariş geçmişi silinecek. Geri alınamaz!</p><div class="mbtns"><button class="mbtn mbtn-c" id="reset-cancel">Vazgeç</button><button class="mbtn mbtn-red" id="reset-ok">Sıfırla</button></div></div></div>
 
 <div class="app">
 <div class="header" id="el-header">
@@ -176,16 +176,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="hright">
     <div class="hclock" id="clk">--:--:--</div>
     <div style="font-size:0.72em;display:flex;align-items:center;padding:7px 10px;background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px;">
-      <span class="sync-dot" id="syncDot"></span><span id="syncTxt" style="color:rgba(180,200,240,0.65);font-weight:600;">Baglaniyor</span>
+      <span class="sync-dot" id="syncDot"></span><span id="syncTxt" style="color:rgba(180,200,240,0.65);font-weight:600;">Bağlanıyor</span>
     </div>
-    <button class="hbtn red" id="btn-reset">Sifirla</button>
+    <button class="hbtn red" id="btn-reset">Sıfırla</button>
   </div>
 </div>
 
 <div class="layout">
 <div class="sidebar">
   <div class="card" id="el-verimlilik">
-    <div class="clbl"><span class="pip"></span> Stok Verimliligi</div>
+    <div class="clbl"><span class="pip"></span> Stok Verimliliği</div>
     <div class="eff-block">
       <div class="eff-circle">
         <svg viewBox="0 0 66 66" style="position:absolute;top:0;left:0;width:100%;height:100%;transform:rotate(-90deg);">
@@ -194,10 +194,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         </svg>
         <div class="eff-num" id="effNum">0</div><div class="eff-pct">%</div>
       </div>
-      <div><div class="etitle" id="effTitle">Hesaplaniyor</div><div class="esub" id="effSub">-</div></div>
+      <div><div class="etitle" id="effTitle">Hesaplanıyor</div><div class="esub" id="effSub">-</div></div>
     </div>
     <div class="metrics">
-      <div class="met"><div class="met-top gr"></div><div class="met-val gr" id="mProd">0</div><div class="met-lbl">Uretilebilir</div></div>
+      <div class="met"><div class="met-top gr"></div><div class="met-val gr" id="mProd">0</div><div class="met-lbl">Üretilebilir</div></div>
       <div class="met"><div class="met-top bl"></div><div class="met-val bl" id="mTot">0</div><div class="met-lbl">Toplam KAP</div></div>
       <div class="met"><div class="met-top rd"></div><div class="met-val rd" id="mCrit">0</div><div class="met-lbl">Kritik</div></div>
     </div>
@@ -205,13 +205,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="barArea"></div>
   </div>
   <div class="card" id="el-siparis">
-    <div class="clbl"><span class="pip g"></span> Siparis Plani - 52 KAP</div>
+    <div class="clbl"><span class="pip g"></span> Sipariş Plani - 52 KAP</div>
     <div id="orderArea"></div>
-    <button class="btn btn-wa" id="btn-wa">WhatsApp ile Paylas</button>
-    <button class="btn btn-green" id="btn-order">Siparisi Stoga Ekle</button>
+    <button class="btn btn-wa" id="btn-wa">WhatsApp ile Paylaş</button>
+    <button class="btn btn-green" id="btn-order">Siparişi Stoka Ekle</button>
   </div>
   <div class="card">
-    <div class="clbl"><span class="pip p"></span> Siparis Gecmisi</div>
+    <div class="clbl"><span class="pip p"></span> Sipariş Geçmişi</div>
     <div id="histArea"></div>
   </div>
 </div>
@@ -220,21 +220,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="tabs" id="el-tabs">
     <button class="tbtn active" id="tb-inventory">Stok</button>
     <button class="tbtn" id="tb-target">Hedef</button>
-    <button class="tbtn" id="tb-alerts">Uyarilar</button>
+    <button class="tbtn" id="tb-alerts">Uyarılar</button>
   </div>
   <div class="tab on" id="tp-inventory">
     <div class="inv-grid" id="invGrid"></div>
-    <div class="add-card" id="addCard"><div style="font-size:1.7em">+</div><div style="font-size:0.78em;font-weight:600;">Yeni Parca Ekle</div></div>
+    <div class="add-card" id="addCard"><div style="font-size:1.7em">+</div><div style="font-size:0.78em;font-weight:600;">Yeni Parça Ekle</div></div>
   </div>
   <div class="tab" id="tp-target">
-    <div class="card"><div class="clbl"><span class="pip"></span> Hedef Batarya Sayisi</div>
+    <div class="card"><div class="clbl"><span class="pip"></span> Hedef Batarya Sayısı</div>
       <div class="target-wrap"><input type="number" id="targetIn" value="100"><span class="target-ico">&#128267;</span></div>
       <div id="targetArea"></div>
     </div>
-    <div class="card"><div class="clbl"><span class="pip g"></span> Siparis Sonrasi Simulasyon</div><div id="simArea"></div></div>
+    <div class="card"><div class="clbl"><span class="pip g"></span> Sipariş Sonrasi Simülasyon</div><div id="simArea"></div></div>
   </div>
   <div class="tab" id="tp-alerts">
-    <div class="card"><div class="clbl"><span class="pip r"></span> Aktif Uyarilar</div><div id="alertArea"></div></div>
+    <div class="card"><div class="clbl"><span class="pip r"></span> Aktif Uyarılar</div><div id="alertArea"></div></div>
   </div>
 </div>
 </div>
@@ -276,7 +276,7 @@ function saveToFirebase(){
   clearTimeout(saveTimer);
   syncStatus(false);
   saveTimer=setTimeout(function(){
-    dbRef.set(S).then(function(){syncStatus(true);}).catch(function(){syncStatus(false);showToast('Baglanti hatasi','w');});
+    dbRef.set(S).then(function(){syncStatus(true);}).catch(function(){syncStatus(false);showToast('Bağlantı hatası','w');});
   },800);
 }
 
@@ -302,7 +302,7 @@ window.onload=function(){
     } else {
       saveToFirebase();renderInv();calc();renderHist();
     }
-  },function(){syncStatus(false);showToast('Baglanti hatasi','w');});
+  },function(){syncStatus(false);showToast('Bağlantı hatası','w');});
 
   updateClock();setInterval(updateClock,1000);
   bind('btn-reset',function(){show('m-reset');});
@@ -424,25 +424,25 @@ function renderInv(){
       +'<span style="font-size:0.68em;font-weight:700;color:rgba(140,165,210,0.5);text-transform:uppercase;letter-spacing:1px;">Toplam Stok</span>'
       +'<span style="font-size:1.3em;font-weight:900;color:#e8f0ff;">'+tot+' <span style="font-size:0.55em;color:rgba(140,165,210,0.5);">KAP</span></span>'
       +'</div>'
-      // Yer stogu satırı
+      // Yer stoku satırı
       +'<div style="margin-bottom:7px;">'
       +'<div style="display:flex;justify-content:space-between;margin-bottom:3px;">'
-      +'<span style="font-size:0.63em;font-weight:700;color:#4fa8ff;">Yer Stogu</span>'
+      +'<span style="font-size:0.63em;font-weight:700;color:#4fa8ff;">Yer Stoku</span>'
       +'<span style="font-size:0.63em;font-weight:700;color:#4fa8ff;">'+(l.yerStock||0)+' KAP</span>'
       +'</div>'
       +'<div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);">'
       +'<div style="height:100%;width:'+yerPct+'%;border-radius:3px;background:linear-gradient(90deg,#1a6ef5,#4fa8ff);"></div>'
       +'</div></div>'
-      // AS/RS stogu satırı
+      // AS/RS stoku satırı
       +'<div>'
       +'<div style="display:flex;justify-content:space-between;margin-bottom:3px;">'
-      +'<span style="font-size:0.63em;font-weight:700;color:#00e090;">AS/RS Stogu</span>'
+      +'<span style="font-size:0.63em;font-weight:700;color:#00e090;">AS/RS Stoku</span>'
       +'<span style="font-size:0.63em;font-weight:700;color:#00e090;">'+(l.asrsStock||0)+' KAP</span>'
       +'</div>'
       +'<div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);">'
       +'<div style="height:100%;width:'+asrsPct+'%;border-radius:3px;background:linear-gradient(90deg,#00b872,#00e090);"></div>'
       +'</div></div>'
-      +'<div style="margin-top:8px;font-size:0.62em;color:rgba(140,165,210,0.4);">'+c+' batarya uretilebilir &middot; '+( l.stock*l.perBox||tot*l.perBox)+' pil</div>'
+      +'<div style="margin-top:8px;font-size:0.62em;color:rgba(140,165,210,0.4);">'+c+' batarya üretilebilir &middot; '+( l.stock*l.perBox||tot*l.perBox)+' pil</div>'
       +'</div>'
       // Giriş alanları
       +'<div style="display:flex;gap:7px;margin-bottom:7px;">'
@@ -454,7 +454,7 @@ function renderInv(){
       +'<div class="inp-wrap"><label class="inp-lbl">Bat/Basina</label><input class="inp" type="number" value="'+l.perBattery+'" data-id="'+l.id+'" data-f="perBattery"></div>'
       +'</div>'
       +'<div style="display:flex;gap:7px;margin-top:7px;">'
-      +'<div class="inp-wrap"><label class="inp-lbl">Kritik Sinir</label><input class="inp" type="number" value="'+l.minStock+'" data-id="'+l.id+'" data-f="minStock"></div>'
+      +'<div class="inp-wrap"><label class="inp-lbl">Kritik Sınır</label><input class="inp" type="number" value="'+l.minStock+'" data-id="'+l.id+'" data-f="minStock"></div>'
       +'</div>'
       +'<div class="ifoot"><button class="sm-btn del" data-del="'+l.id+'">Sil</button></div>';
     g.appendChild(div);
@@ -496,7 +496,7 @@ function calc(){
   var score=sum>0?Math.round((minC/(sum/caps.length))*100):0;if(score>100)score=100;
   st('mProd',minC);st('mTot',totStock);st('mCrit',critCount);st('effNum',score);
   st('effTitle',score>=80?'Dengeli Stok':score>=50?'Orta Denge':'Dengesiz Stok');
-  st('effSub','Su an '+minC+' batarya uretilebilir');
+  st('effSub','Şu an '+minC+' batarya üretilebilir');
   var arc=ge('effArc');
   if(arc){arc.style.strokeDashoffset=String(163-163*score/100);arc.style.stroke=score>=80?'#4fa8ff':score>=50?'#ffaa40':'#ff5060';}
   // Barlar
@@ -510,7 +510,7 @@ function calc(){
       +'<div class="bar-bg"><div class="bar-fill" style="width:'+ratio+'%;background:'+col+'"></div></div></div>';
   }
   sh('barArea',bH);
-  // Siparis algoritması - toplamı kullan
+  // Sipariş algoritması - toplamı kullan
   var T=52,sim=[],rem=T;
   for(var i=0;i<S.levels.length;i++)sim.push(totalStock(S.levels[i]));
   for(var it=0;it<1000&&rem>0.001;it++){
@@ -541,7 +541,7 @@ function calc(){
     oH+='<div class="order-row"><div class="order-name"><div class="bdot" style="background:'+S.levels[i].color+'"></div>'+esc(S.levels[i].name)+'</div>'
       +'<div class="order-r"><span class="order-sim">'+sC[i]+' bat.</span><span class="order-qty">+'+ro[i]+' KAP</span></div></div>';
   }
-  oH+='<div class="order-total"><span class="otl">Siparis Sonrasi</span><span class="otv">'+sM+' bat.</span></div>';
+  oH+='<div class="order-total"><span class="otl">Sipariş Sonrasi</span><span class="otv">'+sM+' bat.</span></div>';
   sh('orderArea',oH);
   // Kart sinifları
   for(var i=0;i<S.levels.length;i++){
@@ -557,7 +557,7 @@ function calc(){
     var l=S.levels[i];var tot=totalStock(l);
     var miss=Math.max(0,Math.ceil((tv*l.perBattery-tot*l.perBox)/l.perBox));
     var ok=miss===0;
-    tH+='<div class="trow"><span class="trow-n">'+esc(l.name)+' icin eksik</span><span class="trow-v'+(ok?' ok':'')+'">'+( ok?'Yeterli':miss+' KAP')+'</span></div>';
+    tH+='<div class="trow"><span class="trow-n">'+esc(l.name)+' için eksik</span><span class="trow-v'+(ok?' ok':'')+'">'+( ok?'Yeterli':miss+' KAP')+'</span></div>';
     var ns=tot+(l.lastOrder||0);var nc=Math.floor(ns*CK[i]);
     sH+='<div class="trow"><span class="trow-n">'+esc(l.name)+': '+tot+' &rarr; '+ns+' KAP</span><span class="trow-v ok">'+nc+' bat.</span></div>';
   }
@@ -566,15 +566,15 @@ function calc(){
   var aH='',minCap=Math.min.apply(null,caps);
   for(var i=0;i<S.levels.length;i++){
     var l=S.levels[i];var tot=totalStock(l);
-    if(tot<=l.minStock)aH+='<div class="trow" style="border-left:3px solid #ff5060"><div><div style="font-weight:700;font-size:0.84em">'+esc(l.name)+' - Kritik Stok</div><div style="font-size:0.68em;color:rgba(180,200,240,0.65);margin-top:2px">Toplam '+tot+' KAP / Sinir '+l.minStock+'</div></div></div>';
+    if(tot<=l.minStock)aH+='<div class="trow" style="border-left:3px solid #ff5060"><div><div style="font-weight:700;font-size:0.84em">'+esc(l.name)+' - Kritik Stok</div><div style="font-size:0.68em;color:rgba(180,200,240,0.65);margin-top:2px">Toplam '+tot+' KAP / Sınır '+l.minStock+'</div></div></div>';
     if(Math.abs(caps[i]-minCap)<0.001)aH+='<div class="trow" style="border-left:3px solid #ffaa40"><div><div style="font-weight:700;font-size:0.84em">'+esc(l.name)+' - Bottleneck</div><div style="font-size:0.68em;color:rgba(180,200,240,0.65);margin-top:2px">'+Math.floor(caps[i])+' bat. kapasite</div></div></div>';
   }
-  sh('alertArea',aH||'<div class="empty" style="color:#00e090">Tum stoklar normal</div>');
+  sh('alertArea',aH||'<div class="empty" style="color:#00e090">Tüm stoklar normal</div>');
 }
 
 function renderHist(){
   var h=ge('histArea');if(!h)return;
-  if(!S.history||!S.history.length){h.innerHTML='<div class="empty">Henuz kayit yok</div>';return;}
+  if(!S.history||!S.history.length){h.innerHTML='<div class="empty">Henüz kayıt yok</div>';return;}
   var html='',list=S.history.slice().reverse();
   for(var i=0;i<Math.min(list.length,8);i++){
     var x=list[i];var tags='';
@@ -589,12 +589,12 @@ function addLvl(){
   var used=[];for(var i=0;i<S.levels.length;i++)used.push(S.levels[i].color);
   var color=cols[nid%cols.length];for(var k=0;k<cols.length;k++){if(used.indexOf(cols[k])<0){color=cols[k];break;}}
   S.levels.push({id:nid++,name:'P'+(S.levels.length+1),yerStock:25,asrsStock:25,minStock:5,perBox:6,perBattery:1,color:color});
-  saveToFirebase();renderInv();calc();showToast('Parca eklendi','s');
+  saveToFirebase();renderInv();calc();showToast('Parça eklendi','s');
 }
 function delLvl(id){
-  if(S.levels.length<=1){showToast('En az 1 parca olmali','w');return;}
+  if(S.levels.length<=1){showToast('En az 1 parça olmalı','w');return;}
   var nl=[];for(var i=0;i<S.levels.length;i++){if(S.levels[i].id!==id)nl.push(S.levels[i]);}
-  S.levels=nl;saveToFirebase();renderInv();calc();showToast('Parca silindi','i');
+  S.levels=nl;saveToFirebase();renderInv();calc();showToast('Parça silindi','i');
 }
 function doOrder(){
   var items=[];
@@ -602,14 +602,14 @@ function doOrder(){
   for(var i=0;i<S.levels.length;i++)S.levels[i].yerStock+=(S.levels[i].lastOrder||0);
   if(!S.history)S.history=[];
   S.history.push({date:new Date().toLocaleString('tr-TR'),items:items});
-  saveToFirebase();hide('m-order');renderInv();calc();renderHist();showToast('Siparis stoga eklendi','s');
+  saveToFirebase();hide('m-order');renderInv();calc();renderHist();showToast('Sipariş stoğa eklendi','s');
 }
 function doReset(){
   S=JSON.parse(JSON.stringify(DEF));nid=20;
-  saveToFirebase();hide('m-reset');renderInv();calc();renderHist();showToast('Veriler sifirlandi','i');
+  saveToFirebase();hide('m-reset');renderInv();calc();renderHist();showToast('Veriler sıfırlandi','i');
 }
 function shareWA(){
-  var t='SIPARIS LISTESI - '+new Date().toLocaleDateString('tr-TR')+'\n--------------------\n';
+  var t='SİPARİŞ LİSTESİ - '+new Date().toLocaleDateString('tr-TR')+'\n--------------------\n';
   for(var i=0;i<S.levels.length;i++)t+='- '+S.levels[i].name+': '+(S.levels[i].lastOrder||0)+' KAP\n';
   t+='--------------------\nTOPLAM: 52 KAP';
   window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
