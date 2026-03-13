@@ -609,9 +609,12 @@ function doReset(){
   saveToFirebase();hide('m-reset');renderInv();calc();renderHist();showToast('Veriler sıfırlandi','i');
 }
 function shareWA(){
-  var t='SİPARİŞ LİSTESİ - '+new Date().toLocaleDateString('tr-TR')+'\n--------------------\n';
-  for(var i=0;i<S.levels.length;i++)t+='- '+S.levels[i].name+': '+(S.levels[i].lastOrder||0)+' KAP\n';
-  t+='--------------------\nTOPLAM: 52 KAP';
+  var tarih=new Date().toLocaleDateString('tr-TR');
+  var t='📦 *SİPARİŞ LİSTESİ* ('+tarih+')\n';
+  t+='-----------------------\n';
+  for(var i=0;i<S.levels.length;i++)t+='• *'+S.levels[i].name+'*: '+(S.levels[i].lastOrder||0)+' KAP\n';
+  t+='-----------------------\n';
+  t+='*TOPLAM SİPARİŞ:* 52 KAP';
   window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
 }
 function showToast(msg,type){
